@@ -1,0 +1,7 @@
+.blog-heading{
+    font-family: 'Roboto Condensed', sans-serif;
+    margin-bottom: 3rem;
+}
+.blog-card-container{
+    flex-wrap: wrap;
+}

@@ -1,0 +1,44 @@
+.Contact-heading{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.input{
+    
+    background-color: #282c34;
+    border-color: #494949;
+    color: #ffffff;
+}
+.input:focus {   
+    border-color: rgba(148, 150, 148, 0.8);
+    background-color: #454546;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(148, 150, 148, 0.8);
+    outline: 0 none;
+    color: #ffffff;
+  }
+  .input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgba(148, 150, 148, 0.8);
+    opacity: 1; /* Firefox */
+}
+
+.input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgba(148, 150, 148, 0.8);
+}
+
+.input::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgba(148, 150, 148, 0.8);
+}
+Form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+.submit-btn{
+    width: 10rem;
+  
+    color: #ffffff;
+    margin-top: 1rem;
+}
+.Contact-section{
+    padding: 4rem;
+}

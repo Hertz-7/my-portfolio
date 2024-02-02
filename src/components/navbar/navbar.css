@@ -1,0 +1,36 @@
+.nav-container {
+    width: 27rem;
+    display: flex;
+    justify-content: center !important;
+    justify-items: center !important;
+    color: #ffffff !important;
+}
+
+.Navbar {
+    position: fixed;
+    top: 0;
+    color: #ffffff !important;
+    width: 100%;
+    z-index: 999;
+  }
+.Navbar{
+    display: flex;
+    justify-content: center !important;
+    justify-items: center !important;
+    animation: border-radius-change-nav 2s linear infinite;
+}
+      
+      @keyframes border-radius-change-nav {
+        0% {
+            border-bottom-left-radius: 257%;
+            border-bottom-right-radius:269%;
+        }
+        50% {
+            border-bottom-left-radius:242%;
+            border-bottom-right-radius:258%;
+        }
+        100% {
+            border-bottom-left-radius:257%;
+            border-bottom-right-radius:269%;
+        }
+      }

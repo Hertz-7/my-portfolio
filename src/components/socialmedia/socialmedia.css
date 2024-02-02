@@ -1,0 +1,15 @@
+.social-icons{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 10rem;
+    width: 4rem;
+    color: darkgray;
+    right: 0;
+    top: 20rem ;
+    z-index: 999;
+}
+.social-icon{
+    margin-bottom: 1rem;
+    color: darkgray;
+}
