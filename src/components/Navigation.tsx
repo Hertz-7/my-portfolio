@@ -10,9 +10,10 @@ interface NavItem {
 
 interface NavigationProps {
   items: NavItem[];
+  orientation?: "vertical" | "horizontal";
 }
 
-export function Navigation({ items }: NavigationProps) {
+export function Navigation({ items, orientation = "vertical" }: NavigationProps) {
   const [active, setActive] = useState<string>(items[0]?.href ?? "");
 
   useEffect(() => {
@@ -42,8 +43,53 @@ export function Navigation({ items }: NavigationProps) {
     return () => observer.disconnect();
   }, [items]);
 
+  if (orientation === "horizontal") {
+    return (
+      <nav
+        aria-label="Primary"
+        className="flex flex-row flex-wrap items-center gap-x-6 gap-y-2 lg:hidden"
+      >
+        {items.map(({ label, href }) => {
+          const isActive = active === href;
+          return (
+            <a
+              key={href}
+              href={href}
+              className={`
+                relative inline-flex items-center
+                text-[11px] font-medium tracking-[0.18em] uppercase
+                py-2
+                transition-colors duration-200
+                focus-visible:outline-none focus-visible:text-[var(--accent)]
+                ${
+                  isActive
+                    ? "text-[var(--accent)]"
+                    : "text-[var(--dim)] hover:text-[var(--type)]"
+                }
+              `}
+            >
+              <motion.span
+                aria-hidden="true"
+                initial={false}
+                animate={{
+                  width: isActive ? "100%" : "0%",
+                }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="absolute left-0 bottom-0 h-px bg-[var(--accent)]"
+              />
+              {label}
+            </a>
+          );
+        })}
+      </nav>
+    );
+  }
+
   return (
-    <nav aria-label="Primary" className="hidden lg:flex flex-col gap-3">
+    <nav
+      aria-label="Primary"
+      className="hidden lg:flex flex-col gap-3"
+    >
       {items.map(({ label, href }) => {
         const isActive = active === href;
         return (
@@ -66,7 +112,7 @@ export function Navigation({ items }: NavigationProps) {
               initial={false}
               animate={{
                 width: isActive ? 60 : 30,
-                backgroundColor: isActive ? "var(--accent)" : "var(--mute)",
+                backgroundColor: isActive ? "var(--accent)" : "var(--dim)",
               }}
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="block h-px"
@@ -75,7 +121,7 @@ export function Navigation({ items }: NavigationProps) {
               className={
                 isActive
                   ? "text-[var(--accent)]"
-                  : "text-[var(--slate)] group-hover:text-[var(--accent)] transition-colors duration-200"
+                  : "text-[var(--dim)] group-hover:text-[var(--accent)] transition-colors duration-200"
               }
             >
               {label}

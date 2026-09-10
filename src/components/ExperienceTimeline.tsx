@@ -147,7 +147,7 @@ export function ExperienceTimelineMobile() {
     <div
       ref={ref}
       aria-hidden="true"
-      className="lg:hidden pointer-events-none absolute left-2 top-0 bottom-0 w-px"
+      className="lg:hidden pointer-events-none absolute -left-3 top-0 bottom-0 w-px"
     >
       <motion.div
         className="h-full w-full bg-[var(--accent)]"

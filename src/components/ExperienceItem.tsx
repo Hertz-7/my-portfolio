@@ -21,99 +21,109 @@ export function ExperienceItem({ item, index }: ExperienceItemProps) {
         delay: index * 0.05,
       }}
       className="
-        group relative grid grid-cols-1
-        lg:grid-cols-[140px_1fr] gap-y-2 lg:gap-x-8
+        group relative
         rounded-[6px] border border-transparent
-        px-5 py-5 lg:px-6 lg:py-6
+        px-0 py-5 sm:px-5 sm:py-5 lg:px-6 lg:py-6
         transition-colors duration-200 ease-out
-        hover:border-[rgba(47,201,194,0.18)]
-        hover:bg-[rgba(20,48,50,0.5)]
-        focus-within:border-[rgba(47,201,194,0.18)]
-        focus-within:bg-[rgba(20,48,50,0.5)]
+        sm:hover:border-[rgba(47,201,194,0.18)]
+        sm:hover:bg-[rgba(20,48,50,0.5)]
+        sm:focus-within:border-[rgba(47,201,194,0.18)]
+        sm:focus-within:bg-[rgba(20,48,50,0.5)]
       "
     >
-      <p className="font-mono text-[11px] font-medium tracking-[0.18em] uppercase text-[var(--mute)] tabular-nums pt-1">
-        {item.date}
-      </p>
-
-      <div className="flex flex-col gap-4">
-        <div className="flex items-baseline gap-2">
-          <h3 className="text-[var(--light)] font-medium text-[1.0625rem] leading-[1.4] tracking-[-0.005em]">
-            {item.role}
-            <span className="text-[var(--slate)] mx-2">·</span>
-            <span className="text-[var(--light)]">{item.company}</span>
-          </h3>
-          {item.href && (
-            <a
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${item.company} — opens in a new tab`}
-              className="
-                inline-flex items-center text-[var(--slate)]
-                group-hover:text-[var(--accent)]
-                transition-all duration-200 ease-out
-                group-hover:translate-x-0.5
-                focus-visible:outline-none focus-visible:text-[var(--accent)]
-              "
-            >
-              <ArrowUpRight className="w-4 h-4" strokeWidth={1.5} />
-            </a>
-          )}
-        </div>
-
-        <p className="text-[var(--slate)] text-[1rem] leading-[1.7] max-w-[58ch]">
-          {item.description}
+      <div
+        className="
+          grid grid-cols-1 gap-y-2
+          lg:grid-cols-[140px_1fr] lg:gap-y-0 lg:gap-x-8
+        "
+      >
+        <p className="
+          font-mono text-[11px] font-medium tracking-[0.18em] uppercase
+          text-[var(--dim)] tabular-nums pt-0.5
+          lg:pt-1
+        ">
+          {item.date}
         </p>
 
-        {item.links && item.links.length > 0 && (
-          <ul className="flex flex-wrap gap-x-5 gap-y-1.5 pt-1">
-            {item.links.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    inline-flex items-center gap-1.5
-                    text-[var(--mute)] hover:text-[var(--accent)]
-                    text-[0.825rem] tracking-[0.02em]
-                    transition-colors duration-200
-                    focus-visible:outline-none focus-visible:text-[var(--accent)]
-                  "
-                >
-                  <ArrowUpRight className="w-3 h-3" strokeWidth={1.5} />
-                  <span>{link.label}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
+        <div className="flex flex-col gap-3 sm:gap-4">
+          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+            <h3 className="text-[var(--type)] font-medium text-[1.0625rem] sm:text-[1.0625rem] leading-[1.4] tracking-[-0.005em]">
+              <span>{item.role}</span>
+              <span className="text-[var(--dim)] mx-2" aria-hidden="true">·</span>
+              <span>{item.company}</span>
+            </h3>
+            {item.href && (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${item.company} — opens in a new tab`}
+                className="
+                  inline-flex items-center text-[var(--dim)]
+                  sm:group-hover:text-[var(--accent)]
+                  transition-all duration-200 ease-out
+                  sm:group-hover:translate-x-0.5
+                  focus-visible:outline-none focus-visible:text-[var(--accent)]
+                "
+              >
+                <ArrowUpRight className="w-4 h-4" strokeWidth={1.5} />
+              </a>
+            )}
+          </div>
 
-        {item.technologies.length > 0 && (
-          <ul className="flex flex-wrap gap-2 pt-2">
-            {item.technologies.map((tech) => (
-              <li key={tech}>
-                <span
-                  className="
-                    inline-block
-                    px-3 py-1
-                    rounded-full
-                    text-[12px]
-                    text-[var(--accent)]
-                    bg-[rgba(47,201,194,0.06)]
-                    border border-[rgba(47,201,194,0.14)]
-                    transition-colors duration-200
-                    group-hover:bg-[rgba(47,201,194,0.1)]
-                    group-hover:border-[rgba(47,201,194,0.24)]
-                  "
-                >
-                  {tech}
-                </span>
-              </li>
-            ))}
-          </ul>
-        )}
+          <p className="text-[var(--prose)] text-[1rem] leading-[1.7]">
+            {item.description}
+          </p>
+
+          {item.links && item.links.length > 0 && (
+            <ul className="flex flex-wrap gap-x-4 sm:gap-x-5 gap-y-1.5 pt-1">
+              {item.links.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="
+                      inline-flex items-center gap-1.5
+                      text-[var(--dim)] hover:text-[var(--accent)]
+                      text-[0.825rem] tracking-[0.02em]
+                      transition-colors duration-200
+                      focus-visible:outline-none focus-visible:text-[var(--accent)]
+                    "
+                  >
+                    <ArrowUpRight className="w-3 h-3" strokeWidth={1.5} />
+                    <span>{link.label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {item.technologies.length > 0 && (
+            <ul className="flex flex-wrap gap-2 pt-2">
+              {item.technologies.map((tech) => (
+                <li key={tech}>
+                  <span
+                    className="
+                      inline-block
+                      px-3 py-1
+                      rounded-full
+                      text-[12px]
+                      text-[var(--accent)]
+                      bg-[rgba(47,201,194,0.06)]
+                      border border-[rgba(47,201,194,0.14)]
+                      transition-colors duration-200
+                      sm:group-hover:bg-[rgba(47,201,194,0.1)]
+                      sm:group-hover:border-[rgba(47,201,194,0.24)]
+                    "
+                  >
+                    {tech}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
     </motion.article>
   );

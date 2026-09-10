@@ -17,13 +17,13 @@ export function Sidebar() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="flex flex-col gap-6"
+        className="flex flex-col gap-5 lg:gap-6"
       >
         <header className="flex flex-col gap-3 max-w-[320px]">
-          <h1 className="text-[var(--type)] font-display font-bold leading-[1.05] tracking-[-0.028em] text-[clamp(2.75rem,4.4vw,3.4rem)]">
+          <h1 className="text-[var(--type)] font-display font-bold leading-[1.05] tracking-[-0.028em] text-[clamp(2.25rem,4.4vw,3.4rem)]">
             Mohammad&nbsp;Aosaf
           </h1>
-          <p className="text-[var(--type)] text-[1.125rem] leading-[1.3] font-medium">
+          <p className="text-[var(--type)] text-[1.0625rem] leading-[1.3] font-medium">
             AI &amp; Full-Stack Engineer
           </p>
           <p className="text-[var(--prose)] text-[0.95rem] leading-[1.6]">
@@ -32,11 +32,15 @@ export function Sidebar() {
           </p>
         </header>
 
-        <div className="my-10 lg:my-16">
-          <Navigation items={NAV_ITEMS} />
+        <div className="mt-1 lg:hidden">
+          <Navigation items={NAV_ITEMS} orientation="horizontal" />
         </div>
 
-        <div className="mt-auto pt-10">
+        <div className="mt-8 lg:mt-16 hidden lg:block">
+          <Navigation items={NAV_ITEMS} orientation="vertical" />
+        </div>
+
+        <div className="mt-6 lg:mt-auto lg:pt-10">
           <SocialLinks />
         </div>
       </motion.div>

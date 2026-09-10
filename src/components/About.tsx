@@ -8,11 +8,11 @@ export function About() {
       id="about"
       className="scroll-mt-24 relative z-10 pt-2 pb-24 lg:pt-0 lg:pb-32"
     >
-      <p className="text-[11px] font-medium tracking-[0.22em] uppercase text-[var(--accent)] mb-10">
+      <p className="text-[11px] font-medium tracking-[0.22em] uppercase text-[var(--accent)] mb-6 sm:mb-8 lg:mb-10">
         01 &nbsp;/&nbsp; About
       </p>
 
-      <div className="flex flex-col gap-6 text-[var(--prose)] text-[1.0625rem] leading-[1.7]">
+      <div className="flex flex-col gap-5 sm:gap-6 text-[var(--prose)] text-[1rem] sm:text-[1.0625rem] leading-[1.7]">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
