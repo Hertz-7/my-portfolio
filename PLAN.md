@@ -3,8 +3,12 @@
 > Working document. **Read this fully before any build phase.** Take all content from here —
 > do not invent copy, metrics, projects, or claims. If something is missing, ask.
 >
-> **Live visual reference (build to match this):**
+> **Live visual reference (layout and composition):**
 > https://claude.ai/code/artifact/e4aeb711-9d2d-4cb3-9a33-01222110be67
+>
+> WARNING: the mockup's *default* palette and faces are Pine / Newsreader / Instrument Sans. The
+> LOCKED choices are **Teal + Bricolage Grotesque + IBM Plex Sans** (see §3) and they override the
+> mockup. Use the mockup for layout, spacing and interaction only.
 
 ---
 
@@ -66,8 +70,8 @@ the component patterns in §4. Take their *component patterns*, not their poster
   Numbers / Contact right. Not a floating pill.
 - **Left-aligned, single column**, 1120px max wrapper.
 - Mono eyebrow: `AI & FULL-STACK ENGINEER — ISLAMABAD, PK`
-- **H1:** sentence case, display serif, `clamp(2.1rem, 4.7vw, 3.6rem)`, line-height `1.1`,
-  letter-spacing `-.014em`, `max-width: 24ch`, `text-wrap: balance`.
+- **H1:** sentence case, display grotesque, `clamp(2.1rem, 4.7vw, 3.6rem)`, line-height `1.08`,
+  letter-spacing `-.028em`, `max-width: 24ch`, `text-wrap: balance`.
 - Supporting paragraph: `max-width: 62ch`, in `--prose`. "ChironOM" and "QLU.ai" in `--type`
   at weight 600.
 - CTA row: filled accent button "View work" (**border-radius 2px, not a pill**), then two mono
@@ -88,13 +92,13 @@ the component patterns in §4. Take their *component patterns*, not their poster
 
 | Token | Value | Used for |
 |---|---|---|
-| `--type` | `#EAF3ED` | headings, H1, big figures, emphasised words |
-| `--prose` | `#C4D3CC` | **all body copy** |
-| `--dim` | `#7F9A93` | mono labels, eyebrows, meta, captions — **only** |
-| `--accent` | `#3FBF9E` | one phrase in the H1, section labels, CTA, hovers, focus rings |
-| `--ground` | `#05100E` | page ground (green-shifted, not neutral black) |
-| `--ground2` | `#081916` | raised surface (preview panel) |
-| `--hair` | `#16302C` | hairline rules |
+| `--type` | `#E6F2F3` | headings, H1, big figures, emphasised words |
+| `--prose` | `#BFD2D6` | **all body copy** |
+| `--dim` | `#7B979E` | mono labels, eyebrows, meta, captions — **only** |
+| `--accent` | `#2FC9C2` | one phrase in the H1, section labels, CTA, hovers, focus rings |
+| `--ground` | `#04121A` | page ground (teal-shifted, not neutral black) |
+| `--ground2` | `#071C25` | raised surface (preview panel) |
+| `--hair` | `#143038` | hairline rules |
 
 > **Body copy must never be set to `--dim`.** That mistake shipped twice in earlier drafts and is
 > the single biggest reason body text looked poorly styled. Prose gets `--prose`; muted is for
@@ -104,22 +108,31 @@ the component patterns in §4. Take their *component patterns*, not their poster
 
 | Role | Face | Settings |
 |---|---|---|
-| **Display** — H1, project names, figures | **Newsreader** 500 (serif) | sentence case, line-height `1.1`, letter-spacing `-.014em` |
-| **Body** — all prose | **Instrument Sans** 400 | `1.06rem`, line-height `1.72`, letter-spacing `.003em`, max `62ch` |
+| **Display** — H1, project names, figures | **Bricolage Grotesque** 700 | sentence case, line-height `1.08`, letter-spacing `-.028em` |
+| **Body** — all prose | **IBM Plex Sans** 400 | `1.02rem`, line-height `1.74`, letter-spacing `.005em`, max `62ch` |
 | **Mono** — labels only | **IBM Plex Mono** 400/500 | 9.5–10.5px, letter-spacing `.16–.24em`, uppercase |
 
-Serif display + sans body. **Do not set body prose in a serif:** a text serif on a dark ground
-optically thins and reads weak. That is why the body face is a sans. Mono is never used for prose.
+**Both display and body are sans**, so hierarchy comes from character, weight and tracking — not
+from a serif/sans contrast. Bricolage Grotesque is a high-character grotesque at 700 with tight
+`-.028em` tracking; IBM Plex Sans is neutral and institutional at 400 with open `.005em` tracking.
+Keep that gap wide or the two read samey. Bricolage is a variable font (optical-size and width
+axes) — leave the width axis at default, do not stretch it.
+
+A bonus of this pairing: **IBM Plex Sans and IBM Plex Mono are the same family**, designed together,
+so body copy and labels sit naturally beside one another.
+
+**Never set prose in the mono**, and do not substitute a serif for body copy — a text serif on this
+dark ground optically thins and reads weak.
 
 Approved palette alternates (swap all seven values as a set):
-- **Teal** — ground `#04121A` · ground2 `#071C25` · hair `#143038` · type `#E6F2F3` · prose `#BFD2D6` · dim `#7B979E` · accent `#2FC9C2`
+- **Pine** — ground `#05100E` · ground2 `#081916` · hair `#16302C` · type `#EAF3ED` · prose `#C4D3CC` · dim `#7F9A93` · accent `#3FBF9E`
 - **Emerald** — `#061410` · `#0A1E17` · `#17332A` · `#EBF4ED` · `#C5D5C9` · `#829C8D` · `#34D399`
 - **Moss** — `#0A1210` · `#101A16` · `#1E2C26` · `#EDF2EB` · `#CBD5C8` · `#8B9A8B` · `#8FBF6A`
 
-Headline face alternates: Instrument Serif, Bricolage Grotesque, Schibsted Grotesk, Syne.
-Body face alternates: Schibsted Grotesk, IBM Plex Sans.
+Headline face alternates: Instrument Serif, Newsreader, Schibsted Grotesk, Syne.
+Body face alternates: Instrument Sans, Schibsted Grotesk.
 **Upgrade path:** on the real site, self-hosting **Switzer** or **General Sans** (Fontshare, free)
-via `next/font/local` beats Instrument Sans for body.
+via `next/font/local` beats IBM Plex Sans for body.
 
 ### Motion budget — three behaviours on the home page, total
 
@@ -342,12 +355,12 @@ FAST-NUCES, Islamabad — 2020–2024. BS Computer Science, CGPA 3.44.
 
 ## 7. Tech stack
 
-- **Next.js 15** (App Router) + **TypeScript**
+- **Next.js 16** (App Router) + **TypeScript** — P0 installed 16.3.4
 - **Tailwind CSS** + **shadcn/ui**
 - **Framer Motion** (`motion`); GSAP only if a chosen component requires it
 - Components per §4, installed per reactbits.dev / skiper-ui.com install docs
 - **MDX** case studies: `content/work/*.mdx` + `next-mdx-remote/rsc` + `gray-matter`
-- Fonts via `next/font/google`: Newsreader, Instrument Sans, IBM Plex Mono
+- Fonts via `next/font/google`: Bricolage Grotesque, IBM Plex Sans, IBM Plex Mono
 - **Vercel** (free) hosting; GitHub for source
 
 ---
@@ -368,9 +381,9 @@ Each phase = one opencode session. Prompts in `PROMPTS.md`.
 
 | Phase | Scope |
 |---|---|
-| **P0** | Scaffold: Next 15 + TS + Tailwind + shadcn + Motion; the seven Pine tokens; three fonts; deploy empty to Vercel |
+| **P0** | Scaffold: Next 16 + TS + Tailwind + shadcn + Motion; the seven Teal tokens; three fonts; deploy empty to Vercel |
 | **P1** | Design system + shell: four-tier text colour, three type roles, spacing scale, hairline top bar, footer |
-| **P2** | Professional hero: eyebrow, sentence-case serif H1, supporting paragraph, CTA row, credential strip, slow stack strip |
+| **P2** | Professional hero: eyebrow, sentence-case grotesque H1, supporting paragraph, CTA row, credential strip, slow stack strip |
 | **P3** | Selected work: MDX pipeline, hover/click/keyboard work index with preview panel, ChironOM + QLU case-study pages, TheoAI index entry |
 | **P4** | In numbers (count-up), About, Skills, Experience, Projects |
 | **P5** | Contact + résumé + SEO/metadata + OG image + analytics |
@@ -407,6 +420,6 @@ Output tokens dominate agent-loop cost, so the out-price is the number that matt
 - Two written case studies (ChironOM, QLU) structured Problem → Approach → Impact.
 - Works at 375 / 768 / 1440; nothing scrolls sideways except the clipped stack strip.
 - The work index responds to hover, click, tap and keyboard.
-- Body copy is `--prose`, never `--dim`. Prose is never set in a serif or a mono.
+- Body copy is `--prose`, never `--dim`. Prose is never set in the display face or the mono.
 - Home page has exactly two motion behaviours; both disable under `prefers-reduced-motion`.
 - Zero generic filler copy. Zero invented claims. No node graphs, no animated backgrounds.

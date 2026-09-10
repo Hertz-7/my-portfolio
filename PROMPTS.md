@@ -18,7 +18,12 @@ skip every checkpoint.
 
 ---
 
-## START HERE — paste this first, before P0
+## START HERE — ONLY if P0 has not run yet
+
+> **P0 is already done** (commit `0d31bc1`, Next 16.3.4 scaffolded, deployed on Vercel from
+> branch `master`). Skip this block and the P0 block — go straight to **P1**.
+>
+> Kept for reference in case the project is ever rebuilt from scratch:
 
 ```
 Read these three files in full before doing anything:
@@ -51,17 +56,17 @@ After that, paste P0's own block if it asks for more detail, then P1, P2 ... one
 ```
 Read PLAN.md fully before doing anything, especially §3.
 
-1. Create a Next.js 15 app in the current directory: App Router, TypeScript, Tailwind CSS,
+1. Create a Next.js 16 app in the current directory: App Router, TypeScript, Tailwind CSS,
    ESLint, pnpm. Do not create a nested subfolder.
 2. Install: framer-motion (motion), next-mdx-remote, gray-matter, lucide-react.
 3. Initialise shadcn/ui (default style, CSS variables enabled).
 4. Fonts via next/font/google, exposed as CSS variables:
-   - Newsreader (400, 500)        -> --font-display   (serif, for headings)
-   - Instrument Sans (400,500,600)-> --font-body      (sans, for all prose)
-   - IBM Plex Mono (400, 500)     -> --font-mono      (labels only)
-5. In globals.css define the SEVEN "Pine" tokens from PLAN.md §3 as CSS custom properties:
-   --ground #05100E, --ground2 #081916, --hair #16302C, --type #EAF3ED, --prose #C4D3CC,
-   --dim #7F9A93, --accent #3FBF9E. Map them into the Tailwind theme.
+   - Bricolage Grotesque (variable, 400..800) -> --font-display  (headings)
+   - IBM Plex Sans (400, 500, 600)            -> --font-body     (all prose)
+   - IBM Plex Mono (400, 500)                 -> --font-mono    (labels only)
+5. In globals.css define the SEVEN "Teal" tokens from PLAN.md §3 as CSS custom properties:
+   --ground #04121A, --ground2 #071C25, --hair #143038, --type #E6F2F3, --prose #BFD2D6,
+   --dim #7B979E, --accent #2FC9C2. Map them into the Tailwind theme.
    This is a committed dark design: set body background to --ground and body color to --prose.
 6. Replace the default page with a token/type proof: all three faces at a few sizes, and swatches
    of all seven colours with their token names, so I can confirm fonts load and nothing falls
@@ -88,14 +93,17 @@ Read PLAN.md §3. System and shell only — no page content.
    text looked poorly styled. Add a short comment in globals.css stating this rule.
 
 2. THREE TYPE ROLES, strictly separated:
-   - DISPLAY (Newsreader 500, serif): H1, project names, figures. Sentence case — NOT uppercase.
-     line-height 1.1, letter-spacing -.014em, text-wrap: balance.
-   - BODY (Instrument Sans 400): all prose. 1.06rem, line-height 1.72, letter-spacing .003em,
+   - DISPLAY (Bricolage Grotesque 700): H1, project names, figures. Sentence case — NOT uppercase.
+     line-height 1.08, letter-spacing -.028em, text-wrap: balance. It is a variable font — leave
+     the width axis at its default, do not stretch it.
+   - BODY (IBM Plex Sans 400): all prose. 1.02rem, line-height 1.74, letter-spacing .005em,
      max-width 62ch, text-wrap: pretty.
    - MONO (IBM Plex Mono): eyebrows, nav, buttons, ticker, captions, tags ONLY. 9.5-10.5px,
      letter-spacing .16-.24em, uppercase.
-   Never set prose in the serif or the mono. A text serif on a dark ground optically thins and
-   reads weak — that is why body is a sans.
+   Never set prose in the mono. Display and body are BOTH sans, so hierarchy comes from character,
+   weight and tracking — Bricolage 700 at -.028em against Plex Sans 400 at .005em. Keep that gap
+   wide or they read samey. IBM Plex Sans and IBM Plex Mono are one family, so body and labels
+   already agree with each other.
 
 3. Spacing: one 8px-based scale. Sibling layout uses flex/grid with gap, never per-element margins.
 
@@ -133,8 +141,8 @@ Build:
 
 2. Mono eyebrow: "AI & FULL-STACK ENGINEER — ISLAMABAD, PK"
 
-3. H1 in the DISPLAY serif, SENTENCE CASE, clamp(2.1rem, 4.7vw, 3.6rem), line-height 1.1,
-   letter-spacing -.014em, max-width 24ch, colour --type:
+3. H1 in the DISPLAY face (Bricolage Grotesque 700), SENTENCE CASE, clamp(2.1rem, 4.7vw, 3.6rem),
+   line-height 1.08, letter-spacing -.028em, max-width 24ch, colour --type:
    "I build production AI systems — from multi-agent reasoning to the platform underneath."
    Wrap ONLY "production AI systems" in the accent colour (an <em> with font-style: normal).
 
@@ -172,10 +180,10 @@ Read PLAN.md §4 ("Component patterns") and §5 ("Work"). Use the content verbat
 2. HOME "SELECTED WORK" INDEX — the skiper80 Projects Showcase pattern, two columns
    (1.1fr / 0.9fr):
    - Left: a list of hairline-separated rows. Each row is a <button> showing the project name in
-     the DISPLAY serif (clamp 1.45rem-2.05rem, colour --dim by default) and the ROLE LABEL beneath
+     the DISPLAY face (clamp 1.45rem-2.05rem, colour --dim by default) and the ROLE LABEL beneath
      it in mono.
    - Right: a preview panel — 1px --hair border, --ground2 background — containing a 16:10
-     screenshot slot, the project name in the display serif (--type), a summary in the BODY sans
+     screenshot slot, the project name in the display face (--type), a summary in the BODY sans
      (--prose), and the tags as mono bordered chips.
    - Selecting a row swaps the panel contents, sets that row's name to --type, its role label to
      --accent, and nudges it 14px right.
@@ -229,7 +237,7 @@ ownership or founding.
 ```
 Read PLAN.md §5. All content comes from there.
 
-1. "IN NUMBERS" section: the four figures from PLAN.md §5 in the DISPLAY serif with
+1. "IN NUMBERS" section: the four figures from PLAN.md §5 in the DISPLAY face with
    font-variant-numeric: tabular-nums and colour --type; captions in mono --dim.
    Each counts up once when it enters view (~950ms ease-out) and never re-runs.
    IMPORTANT: render the REAL final value in the HTML and let JS animate from a lower number —
@@ -270,7 +278,7 @@ Read PLAN.md.
 2. Résumé PDF in /public; download link in the hero CTA row and the footer.
 3. Metadata via the Next.js Metadata API: title, description, canonical, Open Graph, Twitter.
    The title reads as a name, not a slogan.
-4. Dynamic OG image with next/og using the tokens: --ground background, the display serif
+4. Dynamic OG image with next/og using the tokens: --ground background, the display face
    wordmark, one mono line. TYPE ONLY — no diagram, no graph, no background animation.
 5. sitemap.ts, robots.ts, favicon.
 6. Vercel Analytics.
@@ -312,11 +320,14 @@ Then tell me exactly how to point a custom domain at this on Vercel.
 - Confirm the 500k+ figure and architecture details are OK to state publicly before launch.
 - Build a side product you own end to end and make it case study #3.
 
-## If the palette or faces change
+## Locked design choices
 
-Swap only these:
-- **Palette** — the seven values in `globals.css` (Teal / Emerald / Moss sets in PLAN.md §3).
-- **Headline face** — the `next/font/google` import plus display line-height and letter-spacing
-  (alternates: Instrument Serif, Bricolage Grotesque, Schibsted Grotesk, Syne).
-- **Body face** — the import plus size/line-height (alternates: Schibsted Grotesk, IBM Plex Sans;
-  or self-host Switzer / General Sans from Fontshare).
+These are decided — do not substitute:
+- **Palette: Teal** — `#04121A` / `#071C25` / `#143038` / `#E6F2F3` / `#BFD2D6` / `#7B979E` / `#2FC9C2`
+- **Headline: Bricolage Grotesque** 700, line-height 1.08, letter-spacing -.028em
+- **Body: IBM Plex Sans** 400, 1.02rem, line-height 1.74, letter-spacing .005em
+- **Labels: IBM Plex Mono** (same family as the body face)
+
+If they ever change again, swap only the seven values in `globals.css` and the
+`next/font/google` imports plus their line-height / letter-spacing. Palette alternates
+(Pine / Emerald / Moss) and face alternates are in PLAN.md §3.

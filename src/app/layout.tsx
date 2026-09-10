@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Newsreader, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Bricolage_Grotesque, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const newsreader = Newsreader({
+const bricolage = Bricolage_Grotesque({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const instrumentSans = Instrument_Sans({
+const ibmPlexSans = IBM_Plex_Sans({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${instrumentSans.variable} ${ibmPlexMono.variable} dark h-full antialiased`}
+      className={`${bricolage.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} dark h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[var(--ground)] text-[var(--prose)]">
         {children}
