@@ -8,3 +8,5 @@ export { PlainLink } from "./PlainLink";
 export { CredentialStrip } from "./CredentialStrip";
 export { StackStrip } from "./StackStrip";
 export { HeroSection } from "./HeroSection";
+export { WorkIndex } from "./WorkIndex";
+export { ScrollStack, ScrollStackItem } from "./ScrollStack";

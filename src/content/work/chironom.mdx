@@ -1,0 +1,61 @@
+---
+title: "ChironOM"
+roleLabel: "MindHYVE.ai — architected & shipped"
+period: "2024–Present"
+summary: "Multi-tenant healthcare AI platform. Five specialised reasoning agents across six clinical pathways, MTUS/ACOEM retrieval, and tenant isolation moved into Postgres row-level security across 11 data domains."
+tags:
+  - NestJS
+  - Next.js 15
+  - PostgreSQL RLS
+  - pgvector
+  - Azure AI Foundry
+  - BullMQ
+links:
+  - label: "Visit ↗"
+    href: "https://chirongrid.ai/om/"
+order: 1
+---
+
+## Problem
+
+Healthcare AI platforms face a fundamental tension: they need to coordinate multiple specialised reasoning agents across clinical workflows while maintaining strict tenant isolation and grounding responses in medical-legal guidelines — all at the scale required for production healthcare systems.
+
+MindHYVE needed a platform that could serve multiple healthcare tenants from a shared infrastructure without risking data leakage between tenants, while coordinating five specialised reasoning agents (medical, legal, financial, risk, ethics) that must be invoked conditionally per case signals.
+
+## Approach
+
+Built ChironOM as a multi-tenant SaaS platform architected around three core systems: a multi-agent orchestration layer, a medical-legal RAG pipeline, and a re-architected tenant isolation model using PostgreSQL Row-Level Security.
+
+## What I Built
+
+### Multi-Agent Orchestration
+
+A conditional invocation system where five specialised reasoning agents are coordinated across six clinical care pathways. Each agent has a defined scope — medical diagnosis reasoning, legal/regulatory compliance, financial triage, risk assessment, and ethics review. Agents are invoked programmatically per case signals, with a human-in-the-loop physician review step at critical decision points.
+
+### MTUS/ACOEM RAG Pipeline
+
+A retrieval-augmented generation pipeline grounded in MTUS (Medical Treatment Utilization Schedule) and ACOEM (American College of Occupational and Environmental Medicine) guidelines. The pipeline handles PDF ingestion, section-aware chunking, HNSW vector search via pgvector, and a two-step LLM retrieval process that citations checks before surfacing a response.
+
+### Tenant Isolation via PostgreSQL RLS
+
+Re-architected from a database-per-tenant model to a shared-database architecture using PostgreSQL Row-Level Security with JWT-derived tenant context across 11 data domains. Each tenant's row-level isolation was validated by automated isolation tests that run against every PR.
+
+### NestJS REST API
+
+A NestJS API handling JWT tenant context, refresh-token rotation, RBAC for physician and admin roles, and Server-Sent Events for streaming AI responses so clinicians see reasoning output as it generates rather than waiting for a complete response.
+
+### Event-Driven Document Pipeline
+
+BullMQ/Redis workers processing uploaded documents with OCR and structured extraction. Workers retry on failure with exponential backoff, and a dead-letter queue captures documents that fail after max retries for manual review.
+
+### LLM Evaluation & PHI Audit
+
+Production output quality harnesses that score responses against clinical accuracy benchmarks. Full PHI audit logging on every data access event, with tamper-evident storage for compliance reporting.
+
+## Stack
+
+NestJS · Next.js 15 · PostgreSQL RLS · pgvector · Azure AI Foundry · BullMQ · Redis · Server-Sent Events · JWT · RBAC · OCR
+
+## Impact
+
+ChironOM is the flagship platform of MindHYVE.ai, coordinating five specialised reasoning agents across six clinical pathways for multiple healthcare tenants on a shared infrastructure with validated tenant isolation.
