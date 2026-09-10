@@ -7,20 +7,24 @@ export const WORK_INDEX: WorkEntry[] = [
     roleLabel: "MindHYVE.ai — architected & shipped",
     period: "2024–Present",
     summary:
-      "Multi-tenant healthcare AI platform. Five specialised reasoning agents across six clinical pathways, MTUS/ACOEM retrieval, and tenant isolation moved into Postgres row-level security across 11 data domains.",
-    tags: ["NestJS", "Next.js 15", "PostgreSQL RLS", "pgvector", "Azure AI Foundry", "BullMQ"],
+      "Multi-tenant healthcare AI platform covering clinical documentation, billing, authorisation and medical evaluation. Five specialised reasoning agents across six clinical pathways, with retrieval grounded in medical-legal guidelines and human-in-the-loop physician review.",
+    tags: ["NestJS", "Next.js", "PostgreSQL", "pgvector", "Azure AI Foundry", "Redis"],
     links: [{ label: "Visit ↗", href: "https://chirongrid.ai/om/" }],
     order: 1,
   },
   {
     slug: "qlu",
     title: "QLU.ai",
-    roleLabel: "Senior Full Stack Engineer — led 3 engineers + 2 QA across a business unit of 3 products",
+    roleLabel: "QLU.ai — led engineering for a 3-product unit; 3 devs + 2 QA",
     period: "2024–2026",
     summary:
       "AI-native executive sourcing platform. Natural-language candidate search over millions of profiles, an event-driven outreach system, and a Twilio dialer carrying an autonomous voice SDR.",
     tags: ["React", "NestJS", "Elasticsearch", "Redis", "Twilio", "WebSockets"],
-    links: [{ label: "Visit ↗", href: "https://www.qlu.ai/" }],
+    links: [
+      { label: "Visit ↗", href: "https://www.qlu.ai/" },
+      { label: "Outreach ↗", href: "https://www.qlu.ai/outreach" },
+      { label: "Dialer ↗", href: "https://www.qlu.ai/dialer" },
+    ],
     order: 2,
   },
   {

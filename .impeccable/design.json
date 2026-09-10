@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-10T00:00:00.000Z",
+  "title": "Design System: Mohammad Aosaf Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "ground":      { "role": "neutral",  "displayName": "Deep Ground",    "canonical": "#04121A" },
+      "ground2":     { "role": "neutral",  "displayName": "Surface Ground",  "canonical": "#071C25" },
+      "hair":        { "role": "neutral",  "displayName": "Hairline",        "canonical": "#143038" },
+      "type":        { "role": "neutral",  "displayName": "Type",            "canonical": "#E6F2F3" },
+      "prose":       { "role": "neutral",  "displayName": "Prose",           "canonical": "#BFD2D6" },
+      "dim":         { "role": "neutral",  "displayName": "Dim",             "canonical": "#7B979E" },
+      "accent":      { "role": "primary",  "displayName": "Abyssal Teal",    "canonical": "#2FC9C2" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display (Bricolage Grotesque)", "purpose": "Hero H1 only — clamp 2.1–3.6rem, 700wt, -0.028em tracking" },
+      "headline": { "displayName": "Headline (Bricolage Grotesque)", "purpose": "Work entry titles, card headings — clamp 1.45–2.05rem, 700wt, -0.014em tracking" },
+      "body":     { "displayName": "Body (IBM Plex Sans)",           "purpose": "All prose — 1.02rem, 400wt, 1.74 line-height, 62ch max" },
+      "label":    { "displayName": "Label (IBM Plex Mono)",           "purpose": "UI chrome only — nav, tags, meta, CTAs, buttons. Uppercase, 9–10px, 0.16–0.22em tracking" }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-standard",       "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Default easing for state transitions." },
+      { "name": "transition-colors",   "value": "color 150ms ease",             "purpose": "Hover colour shifts on nav, ghost buttons." },
+      { "name": "transition-opacity",  "value": "opacity 150ms ease",           "purpose": "Filled button hover." }
+    ],
+    "breakpoints": [
+      { "name": "sm",  "value": "640px"  },
+      { "name": "lg",  "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Filled Button",
+      "kind": "button",
+      "refersTo": "button-filled",
+      "description": "Primary CTA. Accent background, ground text, mono uppercase label.",
+      "html": "<button class=\"ds-btn-filled\">VIEW WORK</button>",
+      "css": ".ds-btn-filled { display: inline-flex; align-items: center; justify-content: center; background: #2FC9C2; color: #04121A; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; padding: 10px 20px; border: none; border-radius: 2px; cursor: pointer; transition: opacity 150ms ease; } .ds-btn-filled:hover { opacity: 0.9; } .ds-btn-filled:focus-visible { outline: none; box-shadow: 0 0 0 2px #04121A, 0 0 0 4px #2FC9C2; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary/tertiary action. Dim text, hair border, accent on hover.",
+      "html": "<button class=\"ds-btn-ghost\">RESUME</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; background: transparent; color: #7B979E; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; padding: 10px 20px; border: 1px solid #143038; border-radius: 2px; cursor: pointer; transition: color 150ms ease, border-color 150ms ease; } .ds-btn-ghost:hover { color: #2FC9C2; border-color: #2FC9C2; } .ds-btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 2px #04121A, 0 0 0 4px #2FC9C2; }"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Header nav links. Mono uppercase, dim at rest, accent on hover.",
+      "html": "<nav class=\"ds-nav\"><a href=\"/#work\" class=\"ds-nav-link\">WORK</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 2rem; } .ds-nav-link { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: #7B979E; text-decoration: none; transition: color 150ms ease; } .ds-nav-link:hover { color: #2FC9C2; } .ds-nav-link:focus-visible { outline: none; border-radius: 2px; box-shadow: 0 0 0 2px #04121A, 0 0 0 4px #2FC9C2; }"
+    },
+    {
+      "name": "Tag / Chip",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Work entry tags. Mono uppercase, hair border, dim text.",
+      "html": "<span class=\"ds-tag\">React</span>",
+      "css": ".ds-tag { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: #7B979E; border: 1px solid #143038; padding: 4px 8px; border-radius: 2px; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Work entry preview card. Ground2 background, hair border, 12px radius.",
+      "html": "<div class=\"ds-card\"><p class=\"ds-card-title\">ChironOM</p><p class=\"ds-card-body\">Multi-tenant healthcare AI platform.</p></div>",
+      "css": ".ds-card { background: #071C25; border: 1px solid #143038; border-radius: 12px; padding: 1.5rem; } .ds-card-title { font-family: 'Bricolage Grotesque', Georgia, serif; font-size: 1.4rem; font-weight: 700; color: #E6F2F3; line-height: 1.1; letter-spacing: -0.014em; margin-bottom: 0.75rem; } .ds-card-body { font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 1.02rem; color: #BFD2D6; line-height: 1.74; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Deep Station",
+    "overview": "A subterranean control room where every signal earns its place. Dark teal depths create a focused, engineered atmosphere — the portfolio of someone who builds production systems, not presentations. The aesthetic is evidence-logged and deliberate: no decoration without function, no flair without proof. The four-tier text colour system (--type / --prose / --dim / --accent) is a strict codebase rule that shapes every text decision.\n\nThe visual grammar is editorial and restrained. A near-black ground anchors everything; a single cool teal accent (#2FC9C2) operates as a precision tool — applied to exactly one phrase in the H1, section labels, CTAs, and focus rings. Its rarity is structural. Typography mixes a distinctive display grotesque (Bricolage Grotesque) for headlines with a workhorse body sans (IBM Plex Sans) and an information-dense mono label face (IBM Plex Mono).",
+    "keyCharacteristics": [
+      "Abyssal teal-black palette with single luminous accent — no secondary colour dilution",
+      "Flat surfaces with tonal layering (ground → ground2 → hair) — zero decorative shadows",
+      "Mono uppercase labels at tight tracking (0.16–0.22em) create technical authority",
+      "Display headline in Bricolage Grotesque with strong negative tracking (-0.028em)",
+      "Four-tier text system enforced across all components: --type headings / --prose body / --dim labels / --accent CTAs"
+    ],
+    "rules": [
+      { "name": "The One Voice Rule",       "body": "The accent appears on ≤10% of any given screen. Its scarcity is the point.",              "section": "colors" },
+      { "name": "The Mono Label Rule",       "body": "All UI chrome — nav links, tags, section labels, buttons — uses IBM Plex Mono in uppercase at tight tracking. Body never uses mono.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule",  "body": "Surfaces are flat at rest. No shadow under any element by default. When an elevated state is needed, reach for ground2 background before adding shadow.", "section": "elevation" },
+      { "name": "The Hairline Border Rule",  "body": "All separation uses 1px --hair borders. No thicker, no coloured left-border accent on cards, no gradient dividers.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do use the accent #2FC9C2 exclusively for CTAs, focus rings, active states, and the single emphasized headline phrase.",
+      "Do use IBM Plex Mono in uppercase for all UI chrome (nav, tags, labels, buttons).",
+      "Do enforce the four-tier text colour system: --type for headings, --prose for body, --dim for labels, --accent for active/emphasis.",
+      "Do use --ground2 background to elevate surfaces from --ground — this is the only depth mechanism.",
+      "Do use 1px --hair borders for all separations."
+    ],
+    "donts": [
+      "Don't add shadows to any element. Depth comes from tonal layering.",
+      "Don't use --dim for body copy — it is labels only.",
+      "Don't use --accent for decorative purposes. Its scarcity is structural.",
+      "Don't use gradient text. Emphasis comes from weight, colour, or size — not gradient.",
+      "Don't use animated backgrounds, scramble/decode headlines, node graphs, or floating pill nav.",
+      "Don't use section numbers (01/02/03) or kicker eyebrows above headings.",
+      "Don't use more than one accent colour."
+    ]
+  }
+}

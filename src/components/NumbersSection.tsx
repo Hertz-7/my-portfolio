@@ -18,9 +18,9 @@ const METRICS = [
     caption: "Faster candidate search after query optimisation",
   },
   {
-    value: 11,
+    value: 3,
     suffix: "",
-    caption: "Data domains isolated via Postgres row-level security",
+    caption: "Products led end to end — Dialer, Outreach, AI Voice SDR",
   },
 ];
 
@@ -31,11 +31,12 @@ export function NumbersSection() {
         {METRICS.map((metric, i) => (
           <div
             key={metric.caption}
-            className={`px-0 py-6 lg:py-8 ${
-              i > 0 ? "lg:border-l lg:border-[var(--hair)]" : ""
-            } ${i % 2 === 1 ? "pl-6 lg:pl-8 border-l border-[var(--hair)]" : ""} ${
-              i < 2 ? "border-b border-[var(--hair)] lg:border-b-0" : ""
-            }`}
+            className={[
+              "p-6 lg:p-8",
+              i % 2 === 1 ? "border-l border-[var(--hair)]" : "",
+              i < 2 ? "border-b border-[var(--hair)] lg:border-b-0" : "",
+              i > 0 ? "lg:border-l lg:border-[var(--hair)]" : "",
+            ].join(" ")}
           >
             <CountUp
               value={metric.value}

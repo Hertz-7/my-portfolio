@@ -20,8 +20,9 @@ export function AboutSection() {
           sessions.
         </p>
         <p className="font-body text-[1.02rem] leading-[1.74] tracking-[0.005em] text-[var(--prose)]">
-          I write about systems and production AI on GitHub and LinkedIn. FAST-NUCES, BS Computer
-          Science, 2024.
+          At QLU.ai I led engineering for a three-product business unit — Dialer, Outreach
+          automation, and an AI Voice SDR — managing three developers and two QA engineers across
+          architecture, delivery, code quality and release process.
         </p>
       </div>
     </Section>

@@ -62,8 +62,11 @@ export function ProjectsSection() {
                 <p className="font-display font-bold text-[var(--type)] text-[1.1rem] leading-[1.1] tracking-[-0.014em] mb-1">
                   {project.title}
                 </p>
+                <p className="font-mono text-[9px] tracking-[0.18em] uppercase text-[var(--dim)]">
+                  {project.roleLabel}
+                </p>
                 <p className="font-mono text-[9px] tracking-[0.16em] uppercase text-[var(--dim)]">
-                  {project.roleLabel} — {project.period}
+                  {project.period}
                 </p>
               </div>
               <p className="font-body text-[1rem] leading-[1.72] tracking-[0.005em] text-[var(--prose)]">

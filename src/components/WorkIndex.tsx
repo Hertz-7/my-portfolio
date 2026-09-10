@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import Link from "next/link";
+import { Section } from "./Section";
 import { WORK_INDEX } from "@/lib/work-data";
 import { WorkEntry } from "@/lib/work";
 
@@ -13,7 +14,8 @@ export function WorkIndex() {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-0 border border-[var(--hair)]">
+    <Section id="work" label="01 — Selected work">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-0 border border-[var(--hair)]">
       {/* Left: tab list */}
       <div
         role="tablist"
@@ -33,11 +35,12 @@ export function WorkIndex() {
         })}
       </div>
 
-      {/* Right: preview panel */}
-      <div className="border-t lg:border-t-0 lg:border-l border-[var(--hair)] bg-[var(--ground2)] p-6 lg:p-8">
-        <PreviewPanel entry={active} />
+        {/* Right: preview panel */}
+        <div className="border-t lg:border-t-0 lg:border-l border-[var(--hair)] bg-[var(--ground2)] p-6 lg:p-8">
+          <PreviewPanel entry={active} />
+        </div>
       </div>
-    </div>
+    </Section>
   );
 }
 

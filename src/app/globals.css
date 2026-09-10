@@ -21,10 +21,18 @@
   --dim: #7B979E;
   --accent: #2FC9C2;
 
-  /* Font roles — swap these three to change faces */
-  --font-display: var(--font-display), Georgia, serif;
-  --font-body: var(--font-body), system-ui, sans-serif;
-  --font-mono: var(--font-mono), "Courier New", monospace;
+  /* Font stacks — swap these three to change faces.
+   *
+   * DO NOT name these --font-display / --font-body / --font-mono. next/font
+   * already defines those three on <html>. Redefining the same name in terms
+   * of itself (--font-body: var(--font-body), ...) is a self-referential custom
+   * property, which is invalid at computed-value time: the variable resolves to
+   * nothing, every font-family that consumes it collapses, and the whole site
+   * silently falls back to Times New Roman. That bug shipped once already.
+   */
+  --stack-display: var(--font-display), "Bricolage Grotesque", Georgia, serif;
+  --stack-body: var(--font-body), "IBM Plex Sans", system-ui, sans-serif;
+  --stack-mono: var(--font-mono-src), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 @theme inline {
@@ -38,9 +46,9 @@
   --color-foreground: var(--type);
 
   /* Tailwind font-role utilities */
-  --font-sans: var(--font-body);
-  --font-mono: var(--font-mono);
-  --font-heading: var(--font-display);
+  --font-sans: var(--stack-body);
+  --font-mono: var(--stack-mono);
+  --font-heading: var(--stack-display);
 
   /* 8px spacing scale */
   --spacing-1: 0.25rem;
@@ -65,23 +73,23 @@
   body {
     background-color: var(--ground);
     color: var(--prose);
-    font-family: var(--font-body);
+    font-family: var(--stack-body);
   }
   html {
-    font-family: var(--font-body);
+    font-family: var(--stack-body);
   }
 }
 
 .font-display {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--stack-display);
 }
 
 .font-body {
-  font-family: var(--font-body), system-ui, sans-serif;
+  font-family: var(--stack-body);
 }
 
 .font-mono {
-  font-family: var(--font-mono), "Courier New", monospace;
+  font-family: var(--stack-mono);
 }
 
 /* Scroll Stack (React Bits free catalog) */
@@ -124,7 +132,7 @@
 
 /* MDX prose — article rendered via next-mdx-remote/rsc */
 article h2 {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--stack-display);
   font-weight: 700;
   font-size: 1.05rem;
   line-height: 1.3;
@@ -135,7 +143,7 @@ article h2 {
 }
 
 article h3 {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--stack-display);
   font-weight: 700;
   font-size: 1rem;
   line-height: 1.3;
@@ -146,7 +154,7 @@ article h3 {
 }
 
 article p {
-  font-family: var(--font-body), system-ui, sans-serif;
+  font-family: var(--stack-body);
   font-size: 1.02rem;
   line-height: 1.74;
   letter-spacing: 0.005em;
@@ -166,7 +174,7 @@ article em {
 }
 
 article ul {
-  font-family: var(--font-body), system-ui, sans-serif;
+  font-family: var(--stack-body);
   font-size: 1.02rem;
   line-height: 1.74;
   letter-spacing: 0.005em;
@@ -186,7 +194,7 @@ article a {
 }
 
 article code {
-  font-family: var(--font-mono), monospace;
+  font-family: var(--stack-mono);
   font-size: 0.875em;
   background: var(--ground2);
   padding: 0.1em 0.3em;

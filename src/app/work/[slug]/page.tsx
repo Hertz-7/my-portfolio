@@ -5,6 +5,69 @@ import { getWorkBySlug, getWorkContent, getAllWork } from "@/lib/mdx";
 import { ScrollStack, ScrollStackItem } from "@/components/ScrollStack";
 import { Header, Footer } from "@/components";
 
+const mdxComponents = {
+  h1: (p: React.ComponentProps<"h1">) => (
+    <h1
+      className="font-display font-bold text-[var(--type)] text-[1.85rem] leading-[1.08] tracking-[-0.028em] mt-14 mb-4"
+      {...p}
+    />
+  ),
+  h2: (p: React.ComponentProps<"h2">) => (
+    <h2
+      className="font-display font-bold text-[var(--type)] text-[1.5rem] leading-[1.12] tracking-[-0.024em] mt-14 mb-4 pt-8 border-t border-[var(--hair)]"
+      {...p}
+    />
+  ),
+  h3: (p: React.ComponentProps<"h3">) => (
+    <h3
+      className="font-display font-bold text-[var(--type)] text-[1.15rem] leading-[1.2] tracking-[-0.014em] mt-10 mb-3"
+      {...p}
+    />
+  ),
+  h4: (p: React.ComponentProps<"h4">) => (
+    <h4
+      className="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--accent)] mt-9 mb-3"
+      {...p}
+    />
+  ),
+  p: (p: React.ComponentProps<"p">) => (
+    <p
+      className="font-body text-[1.02rem] leading-[1.74] tracking-[0.005em] text-[var(--prose)] mb-5"
+      {...p}
+    />
+  ),
+  ul: (p: React.ComponentProps<"ul">) => (
+    <ul className="flex flex-col gap-2 mb-6 pl-5 list-disc marker:text-[var(--accent)]" {...p} />
+  ),
+  ol: (p: React.ComponentProps<"ol">) => (
+    <ol className="flex flex-col gap-2 mb-6 pl-5 list-decimal marker:text-[var(--dim)]" {...p} />
+  ),
+  li: (p: React.ComponentProps<"li">) => (
+    <li
+      className="font-body text-[1.02rem] leading-[1.7] tracking-[0.005em] text-[var(--prose)]"
+      {...p}
+    />
+  ),
+  strong: (p: React.ComponentProps<"strong">) => (
+    <strong className="text-[var(--type)] font-semibold" {...p} />
+  ),
+  a: (p: React.ComponentProps<"a">) => (
+    <a
+      className="text-[var(--accent)] underline decoration-[var(--hair)] underline-offset-4 hover:decoration-[var(--accent)] transition-colors"
+      target="_blank"
+      rel="noopener noreferrer"
+      {...p}
+    />
+  ),
+  code: (p: React.ComponentProps<"code">) => (
+    <code
+      className="font-mono text-[0.86em] text-[var(--type)] bg-[var(--ground2)] border border-[var(--hair)] rounded-[2px] px-1.5 py-0.5"
+      {...p}
+    />
+  ),
+  hr: () => <hr className="my-12 border-t border-[var(--hair)]" />,
+};
+
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -21,7 +84,7 @@ export async function generateMetadata({ params }: Props) {
   const entry = getWorkBySlug(slug);
   if (!entry) return {};
   return {
-    title: `${entry.title} — Mohammad Aosaf`,
+    title: entry.title,
     description: entry.summary,
   };
 }
@@ -96,7 +159,7 @@ export default async function WorkPage({ params }: Props) {
         <section className="py-16">
           <div className="max-w-[1120px] mx-auto px-6 lg:px-8">
             <article className="max-w-[62ch]">
-              <MDXRemote source={content} />
+              <MDXRemote source={content} components={mdxComponents} />
             </article>
           </div>
         </section>

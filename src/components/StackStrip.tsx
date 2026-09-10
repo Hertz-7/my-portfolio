@@ -4,11 +4,10 @@ import { useEffect, useRef } from "react";
 
 const STACK = [
   "NestJS",
-  "Next.js 15",
-  "React 19",
+  "Next.js",
+  "React",
   "PostgreSQL",
   "pgvector",
-  "Row-Level Security",
   "Drizzle",
   "Redis",
   "BullMQ",
@@ -38,7 +37,12 @@ export function StackStrip() {
 
     const track = trackRef.current;
     if (!track) return;
-    const halfWidth = track.scrollWidth / 2;
+    // Measured after the webfonts settle: measuring on mount uses fallback
+    // metrics and the loop then jumps or appears to stall.
+    let halfWidth = track.scrollWidth / 2;
+    const remeasure = () => { halfWidth = track.scrollWidth / 2; };
+    if (document.fonts?.ready) void document.fonts.ready.then(remeasure);
+    window.addEventListener("resize", remeasure);
     let lastTime = 0;
     const speed = 0.3;
     const el = track;
@@ -56,7 +60,10 @@ export function StackStrip() {
     }
 
     rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("resize", remeasure);
+    };
   }, []);
 
   const allItems = [...STACK, ...STACK];

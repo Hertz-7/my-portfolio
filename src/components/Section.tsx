@@ -10,7 +10,7 @@ interface SectionProps {
 
 export function Section({ children, className = "", id, label }: SectionProps) {
   return (
-    <section id={id} className={`py-16 lg:py-24 ${className}`}>
+    <section id={id} className={`py-12 lg:py-20 ${className}`}>
       <Container>
         {label && (
           <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--accent)] mb-8 lg:mb-12">

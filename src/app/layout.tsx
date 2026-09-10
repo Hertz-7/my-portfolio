@@ -18,7 +18,7 @@ const ibmPlexSans = IBM_Plex_Sans({
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-mono",
+  variable: "--font-mono-src",
   subsets: ["latin"],
   weight: ["400", "500"],
   display: "swap",
