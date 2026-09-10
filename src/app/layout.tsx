@@ -1,26 +1,12 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-display",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const ibmPlexSans = IBM_Plex_Sans({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-mono-src",
-  subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -34,9 +20,7 @@ export const metadata: Metadata = {
   description:
     "AI & Full-Stack Engineer building production agentic AI systems end to end — multi-agent reasoning, RAG pipelines, and scalable full-stack platforms.",
   metadataBase: new URL(BASE_URL),
-  alternates: {
-    canonical: BASE_URL,
-  },
+  alternates: { canonical: BASE_URL },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -65,27 +49,19 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-    },
+    googleBot: { index: true, follow: true },
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${bricolage.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-[var(--ground)] text-[var(--prose)] font-body">
+    <html lang="en" className={`${inter.variable} antialiased h-full`}>
+      <body className="min-h-full bg-[var(--ground)] text-[var(--slate)]">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[var(--accent)] focus:text-[var(--ground)] focus:font-mono focus:text-[10px] focus:tracking-[0.18em] focus:uppercase focus:rounded-[2px]"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[var(--accent)] focus:text-[var(--ground)] focus:text-xs focus:tracking-[0.18em] focus:uppercase focus:rounded-sm"
         >
           Skip to content
         </a>

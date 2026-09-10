@@ -1,14 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 interface NavItem {
-  index: string;
   label: string;
   href: string;
 }
 
-export function SidebarNav({ items }: { items: NavItem[] }) {
+interface NavigationProps {
+  items: NavItem[];
+}
+
+export function Navigation({ items }: NavigationProps) {
   const [active, setActive] = useState<string>(items[0]?.href ?? "");
 
   useEffect(() => {
@@ -24,8 +28,7 @@ export function SidebarNav({ items }: { items: NavItem[] }) {
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort(
-            (a, b) =>
-              (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0)
+            (a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0)
           )[0];
         if (visible) setActive(`#${visible.target.id}`);
       },
@@ -40,50 +43,44 @@ export function SidebarNav({ items }: { items: NavItem[] }) {
   }, [items]);
 
   return (
-    <nav aria-label="Primary" className="mt-10 flex flex-col gap-1">
-      {items.map(({ index, label, href }) => {
+    <nav aria-label="Primary" className="hidden lg:flex flex-col gap-3">
+      {items.map(({ label, href }) => {
         const isActive = active === href;
         return (
-          <a
+          <motion.a
             key={href}
             href={href}
-            className={`
-              group relative flex items-center gap-4 py-2 pl-0
-              font-mono text-[10.5px] tracking-[0.2em] uppercase
-              transition-colors duration-150
-              focus-visible:outline-none focus-visible:text-[var(--accent)]
-            `}
+            initial={false}
+            animate={{
+              opacity: isActive ? 1 : 0.65,
+            }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="
+              group flex items-center gap-5
+              text-[11px] font-medium tracking-[0.18em] uppercase
+              focus-visible:outline-none focus-visible:opacity-100
+            "
           >
-            <span
+            <motion.span
               aria-hidden="true"
-              className={`
-                inline-block h-px transition-all duration-200
-                ${
-                  isActive
-                    ? "w-12 bg-[var(--accent)]"
-                    : "w-6 bg-[var(--dim)] group-hover:w-10 group-hover:bg-[var(--accent)]"
-                }
-              `}
+              initial={false}
+              animate={{
+                width: isActive ? 60 : 30,
+                backgroundColor: isActive ? "var(--accent)" : "var(--mute)",
+              }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="block h-px"
             />
             <span
               className={
                 isActive
                   ? "text-[var(--accent)]"
-                  : "text-[var(--dim)] group-hover:text-[var(--accent)]"
-              }
-            >
-              {index}
-            </span>
-            <span
-              className={
-                isActive
-                  ? "text-[var(--type)]"
-                  : "text-[var(--dim)] group-hover:text-[var(--accent)]"
+                  : "text-[var(--slate)] group-hover:text-[var(--accent)] transition-colors duration-200"
               }
             >
               {label}
             </span>
-          </a>
+          </motion.a>
         );
       })}
     </nav>

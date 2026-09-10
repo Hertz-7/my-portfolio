@@ -1,15 +1,15 @@
+export { Portfolio } from "./Portfolio";
+export { Sidebar } from "./Sidebar";
+export { Navigation } from "./Navigation";
+export { SocialLinks } from "./SocialLinks";
+export { About } from "./About";
+export { Experience } from "./Experience";
+export { ExperienceItem } from "./ExperienceItem";
+export {
+  ExperienceTimeline,
+  ExperienceTimelineMobile,
+} from "./ExperienceTimeline";
+export { Project } from "./Project";
+export { Projects } from "./Projects";
 export { Header } from "./Header";
 export { Footer } from "./Footer";
-export { Sidebar } from "./Sidebar";
-export { SidebarNav } from "./SidebarNav";
-export { SmoothScroll } from "./SmoothScroll";
-export { Container } from "./Container";
-export { Section } from "./Section";
-export { Button } from "./Button";
-export { PlainLink } from "./PlainLink";
-export { ScrollStack, ScrollStackItem } from "./ScrollStack";
-export { AnimatedContent } from "./AnimatedContent";
-export { CountUp } from "./CountUp";
-export { AboutSection } from "./AboutSection";
-export { ExperienceSection } from "./ExperienceSection";
-export { ProjectsSection } from "./ProjectsSection";
