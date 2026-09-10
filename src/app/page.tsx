@@ -1,4 +1,16 @@
-import { Header, Footer, HeroSection, Section, Rule, WorkIndex } from "@/components";
+import {
+  Header,
+  Footer,
+  HeroSection,
+  Rule,
+  WorkIndex,
+  NumbersSection,
+  AboutSection,
+  SkillsSection,
+  ExperienceSection,
+  ProjectsSection,
+  EducationSection,
+} from "@/components";
 
 export default function Home() {
   return (
@@ -9,25 +21,58 @@ export default function Home() {
 
         <Rule />
 
-        <Section id="work" label="Selected Work">
-          <WorkIndex />
-        </Section>
+        <WorkIndex />
 
         <Rule />
 
-        <Section id="numbers" label="In Numbers">
-          <p className="text-[1.02rem] leading-[1.74] tracking-[0.005em] text-[var(--prose)] max-w-[62ch]">
-            Numbers content goes here — P4 builds the count-up section.
-          </p>
-        </Section>
+        <NumbersSection />
 
         <Rule />
 
-        <Section id="contact" label="Contact">
-          <p className="text-[1.02rem] leading-[1.74] tracking-[0.005em] text-[var(--prose)] max-w-[62ch]">
-            Contact content goes here — P5 builds the contact section.
-          </p>
-        </Section>
+        <AboutSection />
+
+        <Rule />
+
+        <SkillsSection />
+
+        <Rule />
+
+        <ExperienceSection />
+
+        <Rule />
+
+        <ProjectsSection />
+
+        <Rule />
+
+        <EducationSection />
+
+        <Rule />
+
+        <footer className="py-12 border-t border-[var(--hair)]" id="contact">
+          <div className="max-w-[1120px] mx-auto px-6 lg:px-8">
+            <p className="font-mono text-[9.5px] tracking-[0.18em] uppercase text-[var(--dim)]">
+              mohammadaosaf@gmail.com —{" "}
+              <a
+                href="https://github.com/Hertz-7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[var(--accent)] transition-colors"
+              >
+                GitHub
+              </a>{" "}
+              —{" "}
+              <a
+                href="https://linkedin.com/in/mohammad-aosaf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[var(--accent)] transition-colors"
+              >
+                LinkedIn
+              </a>
+            </p>
+          </div>
+        </footer>
       </main>
       <Footer />
     </>
