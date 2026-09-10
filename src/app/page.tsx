@@ -1,53 +1,22 @@
-import {
-  Header,
-  Footer,
-  HeroSection,
-  Rule,
-  WorkIndex,
-  NumbersSection,
-  AboutSection,
-  SkillsSection,
-  ExperienceSection,
-  ProjectsSection,
-  EducationSection,
-} from "@/components";
+import { Sidebar } from "@/components/Sidebar";
+import { Footer } from "@/components/Footer";
+import { SmoothScroll } from "@/components/SmoothScroll";
+import { AboutSection } from "@/components/AboutSection";
+import { ExperienceSection } from "@/components/ExperienceSection";
+import { ProjectsSection } from "@/components/ProjectsSection";
 
 export default function Home() {
   return (
-    <>
-      <Header />
-      <main id="main-content" className="flex-1">
-        <HeroSection />
-
-        <Rule />
-
-        <WorkIndex />
-
-        <Rule />
-
-        <NumbersSection />
-
-        <Rule />
-
-        <AboutSection />
-
-        <Rule />
-
-        <SkillsSection />
-
-        <Rule />
-
-        <ExperienceSection />
-
-        <Rule />
-
-        <ProjectsSection />
-
-        <Rule />
-
-        <EducationSection />
-      </main>
-      <Footer />
-    </>
+    <SmoothScroll>
+      <div className="layout-shell">
+        <Sidebar />
+        <main id="main-content" className="layout-main flex flex-col">
+          <AboutSection />
+          <ExperienceSection />
+          <ProjectsSection />
+          <Footer />
+        </main>
+      </div>
+    </SmoothScroll>
   );
 }

@@ -74,9 +74,26 @@
     background-color: var(--ground);
     color: var(--prose);
     font-family: var(--stack-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   html {
     font-family: var(--stack-body);
+  }
+  html.lenis {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
   }
 }
 
@@ -90,6 +107,40 @@
 
 .font-mono {
   font-family: var(--stack-mono);
+}
+
+/* Sidebar layout — Brittany-style: sticky left rail, scrolling right column */
+.layout-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--ground);
+}
+
+@media (min-width: 1024px) {
+  .layout-shell {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.layout-main {
+  flex: 1 1 0%;
+  min-width: 0;
+  max-width: 880px;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .layout-main {
+    padding: 0 3rem 0 2.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .layout-main {
+    padding-right: 5rem;
+  }
 }
 
 /* Scroll Stack (React Bits free catalog) */

@@ -1,67 +1,150 @@
-import { Section } from "./Section";
-
 const EXPERIENCE = [
   {
-    number: "01",
+    period: "2026 — Present",
     role: "AI & Full-Stack Engineer",
     company: "MindHYVE.ai",
-    period: "Jan 2026 — Present",
-    note: "Agentic Full-Cycle Engineer",
+    companyHref: "https://chirongrid.ai/om/",
+    description:
+      "Architecting and shipping ChironOM — a multi-tenant healthcare AI platform covering clinical documentation, billing, authorisation and medical evaluation. Five specialised reasoning agents across six clinical pathways, with retrieval grounded in medical-legal guidelines and human-in-the-loop physician review.",
+    tags: ["Next.js", "NestJS", "PostgreSQL", "pgvector", "Azure AI Foundry"],
+    liveLinks: [{ label: "ChironOM ↗", href: "https://chirongrid.ai/om/" }],
   },
   {
-    number: "02",
+    period: "2024 — 2026",
     role: "Senior Full Stack Engineer",
     company: "QLU.ai",
-    period: "Jul 2024 — Jan 2026",
-    note: "Led engineering for a business unit of 3 products (Dialer, Outreach, AI Voice SDR), 3 engineers + 2 QA",
+    companyHref: "https://www.qlu.ai/",
+    description:
+      "Led engineering for a three-product business unit (Dialer, Outreach automation, AI Voice SDR) — managing three developers and two QA engineers across architecture, delivery, code quality and release process. Natural-language candidate search over millions of profiles, event-driven outreach, and a Twilio dialer carrying an autonomous voice SDR.",
+    tags: [
+      "React",
+      "NestJS",
+      "Elasticsearch",
+      "Redis",
+      "Twilio",
+      "WebSockets",
+    ],
+    liveLinks: [
+      { label: "QLU.ai ↗", href: "https://www.qlu.ai/" },
+      { label: "Outreach ↗", href: "https://www.qlu.ai/outreach" },
+      { label: "Dialer ↗", href: "https://www.qlu.ai/dialer" },
+    ],
   },
   {
-    number: "03",
+    period: "2024",
     role: "Full Stack Engineer",
     company: "Thy Reality",
-    period: "May 2024 — Sep 2024",
-    note: "Crypto property-share platform",
+    companyHref: null,
+    description:
+      "Crypto property-share platform. Next.js + NestJS + PostgreSQL stack; built the investor dashboard, KYC onboarding flow, and the share-allocation ledger.",
+    tags: ["Next.js", "NestJS", "PostgreSQL", "Web3"],
+    liveLinks: [],
   },
   {
-    number: "04",
+    period: "2023",
     role: "React Developer Intern",
     company: "Hexa IT",
-    period: "Jun 2023 — Aug 2023",
-    note: "",
+    companyHref: null,
+    description:
+      "Built reusable React component libraries and shipped internal admin tools for client engagements.",
+    tags: ["React", "TypeScript", "SCSS"],
+    liveLinks: [],
   },
 ];
 
 export function ExperienceSection() {
   return (
-    <Section id="experience" label="Experience">
-      <div className="flex flex-col">
+    <section id="experience" className="scroll-mt-24 py-20 lg:py-28">
+      <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--accent)] mb-12">
+        02 &nbsp;/&nbsp; Experience
+      </p>
+
+      <ul className="flex flex-col gap-6">
         {EXPERIENCE.map((item, i) => (
-          <div
-            key={item.company}
-            className={`grid grid-cols-[2.5rem_1fr] gap-4 py-6 ${
-              i > 0 ? "border-t border-[var(--hair)]" : ""
-            }`}
-          >
-            <span className="font-mono text-[9px] tracking-[0.18em] text-[var(--dim)] pt-0.5">
-              {item.number}
-            </span>
-            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-              <div className="flex flex-col">
-                <p className="text-[1.02rem] leading-[1.72] tracking-[0.005em] text-[var(--type)] font-semibold">
-                  {item.role}
-                </p>
-                <p className="font-mono text-[9.5px] tracking-[0.16em] uppercase text-[var(--dim)]">
-                  {item.company}
-                  {item.note ? ` — ${item.note}` : ""}
-                </p>
-              </div>
-              <p className="font-mono text-[9.5px] tracking-[0.16em] uppercase text-[var(--dim)] shrink-0">
-                {item.period}
-              </p>
-            </div>
-          </div>
+          <li key={`${item.company}-${i}`}>
+            <ExperienceCard item={item} />
+          </li>
         ))}
+      </ul>
+    </section>
+  );
+}
+
+function ExperienceCard({
+  item,
+}: {
+  item: (typeof EXPERIENCE)[number];
+}) {
+  return (
+    <article
+      className="
+        grid grid-cols-1 lg:grid-cols-[10rem_1fr] gap-4 lg:gap-10
+        rounded-[12px] border border-[var(--hair)] bg-[var(--ground2)]
+        p-6 lg:p-8
+        transition-colors duration-150
+        hover:border-[var(--accent)]
+      "
+    >
+      <div className="flex flex-col gap-1.5">
+        <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[var(--dim)] tabular-nums">
+          {item.period}
+        </p>
       </div>
-    </Section>
+
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1">
+          <h3 className="font-display font-bold text-[var(--type)] text-[clamp(1.15rem,1.5vw,1.35rem)] leading-[1.15] tracking-[-0.014em]">
+            {item.role}
+          </h3>
+          <p className="font-mono text-[10.5px] tracking-[0.18em] uppercase text-[var(--accent)]">
+            {item.companyHref ? (
+              <a
+                href={item.companyHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[var(--type)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ground2)] rounded-sm"
+              >
+                {item.company}
+              </a>
+            ) : (
+              item.company
+            )}
+          </p>
+        </div>
+
+        <p className="font-body text-[1rem] leading-[1.72] tracking-[0.005em] text-[var(--prose)] max-w-[58ch]">
+          {item.description}
+        </p>
+
+        {item.tags.length > 0 && (
+          <ul className="flex flex-wrap gap-2 pt-1">
+            {item.tags.map((tag) => (
+              <li
+                key={tag}
+                className="font-mono text-[9.5px] tracking-[0.16em] uppercase text-[var(--dim)] border border-[var(--hair)] px-2 py-1 rounded-[2px]"
+              >
+                {tag}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {item.liveLinks.length > 0 && (
+          <div className="flex flex-wrap gap-x-5 gap-y-1 pt-2">
+            {item.liveLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[10px] tracking-[0.18em] uppercase text-[var(--accent)] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ground2)] rounded-sm"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </article>
   );
 }
