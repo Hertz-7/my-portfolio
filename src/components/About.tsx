@@ -6,7 +6,7 @@ export function About() {
   return (
     <section
       id="about"
-      className="scroll-mt-24 relative z-10 pt-2 pb-24 lg:pt-0 lg:pb-32"
+      className="scroll-mt-24 relative z-10 pt-2 pb-16 lg:pt-0 lg:pb-20"
     >
       <p className="text-[11px] font-medium tracking-[0.22em] uppercase text-[var(--accent)] mb-6 sm:mb-8 lg:mb-10">
         01 &nbsp;/&nbsp; About

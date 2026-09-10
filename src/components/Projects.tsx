@@ -7,7 +7,7 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="scroll-mt-24 pt-2 pb-24 lg:pt-0 lg:pb-32"
+      className="scroll-mt-24 pt-2 pb-20 lg:pt-0 lg:pb-24"
     >
       <p className="text-[11px] font-medium tracking-[0.22em] uppercase text-[var(--accent)] mb-6 sm:mb-8 lg:mb-14">
         03 &nbsp;/&nbsp; Projects

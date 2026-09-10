@@ -23,7 +23,7 @@ export function Portfolio() {
           <Projects />
         </div>
 
-        <footer className="relative z-10 mt-12 pt-8 border-t border-[var(--hair)]">
+        <footer className="relative z-10 mt-4 pt-8 border-t border-[var(--hair)]">
           <p className="text-[var(--dim)] text-[11px] tracking-[0.18em] uppercase">
             Designed &amp; built by Mohammad Aosaf &nbsp;·&nbsp; Islamabad, PK
           </p>
