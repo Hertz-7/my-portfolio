@@ -34,9 +34,9 @@ export function Sidebar() {
   return (
     <aside
       className="
-        lg:sticky lg:top-0 lg:h-screen lg:w-[260px] lg:shrink-0
+        lg:sticky lg:top-0 lg:h-screen lg:w-1/2 lg:shrink-0
         flex flex-col
-        px-6 pt-10 pb-8 lg:px-8 lg:pt-14 lg:pb-12
+        px-6 pt-10 pb-8 lg:px-12 lg:pt-16 lg:pb-12
         bg-[var(--ground)]
       "
     >
