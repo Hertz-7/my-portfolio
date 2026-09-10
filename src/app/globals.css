@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --ground: #05100E;
+  --ground2: #081916;
+  --hair: #16302C;
+  --type: #EAF3ED;
+  --prose: #C4D3CC;
+  --dim: #7F9A93;
+  --accent: #3FBF9E;
+  --font-display: var(--font-display), Georgia, serif;
+  --font-body: var(--font-body), system-ui, sans-serif;
+  --font-mono: var(--font-mono), monospace;
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-ground2: var(--ground2);
+  --color-hair: var(--hair);
+  --color-type: var(--type);
+  --color-prose: var(--prose);
+  --color-dim: var(--dim);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-display);
+}
+
+@layer base {
+  * {
+    @apply border-[var(--hair)] outline-ring/50;
+  }
+  body {
+    background-color: var(--ground);
+    color: var(--prose);
+    font-family: var(--font-body);
+  }
+  html {
+    font-family: var(--font-body);
+  }
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.font-body {
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
