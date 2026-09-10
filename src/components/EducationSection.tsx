@@ -6,10 +6,10 @@ export function EducationSection() {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
           <div className="flex flex-col">
-            <p className="text-[1.02rem] leading-[1.74] tracking-[0.005em] text-[var(--type)] font-semibold">
+            <p className="font-display font-bold text-[1.02rem] leading-[1.74] tracking-[0.005em] text-[var(--type)]">
               FAST-NUCES, Islamabad
             </p>
-            <p className="text-[1.02rem] leading-[1.74] tracking-[0.005em] text-[var(--prose)]">
+            <p className="font-body text-[1.02rem] leading-[1.74] tracking-[0.005em] text-[var(--prose)]">
               BS Computer Science
             </p>
           </div>

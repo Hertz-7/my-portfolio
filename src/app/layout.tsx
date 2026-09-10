@@ -82,7 +82,7 @@ export default function RootLayout({
       lang="en"
       className={`${bricolage.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--ground)] text-[var(--prose)]">
+      <body className="min-h-full flex flex-col bg-[var(--ground)] text-[var(--prose)] font-body">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[var(--accent)] focus:text-[var(--ground)] focus:font-mono focus:text-[10px] focus:tracking-[0.18em] focus:uppercase focus:rounded-[2px]"

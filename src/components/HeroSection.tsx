@@ -25,7 +25,7 @@ export function HeroSection() {
           — from multi-agent reasoning to the platform underneath.
         </h1>
 
-        <p className="mt-6 text-[1.02rem] leading-[1.74] tracking-[0.005em] text-[var(--prose)] max-w-[62ch]">
+        <p className="mt-6 font-body text-[1.02rem] leading-[1.74] tracking-[0.005em] text-[var(--prose)] max-w-[62ch]">
           Currently at{" "}
           <span className="text-[var(--type)] font-semibold">MindHYVE.ai</span>, where I
           architected and shipped{" "}

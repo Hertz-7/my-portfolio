@@ -66,7 +66,7 @@ export function ProjectsSection() {
                   {project.roleLabel} — {project.period}
                 </p>
               </div>
-              <p className="text-[1rem] leading-[1.72] tracking-[0.005em] text-[var(--prose)]">
+              <p className="font-body text-[1rem] leading-[1.72] tracking-[0.005em] text-[var(--prose)]">
                 {project.summary}
               </p>
               <div className="flex flex-wrap gap-2">

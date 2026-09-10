@@ -12,6 +12,7 @@
  */
 
 :root {
+  /* Palette — Teal */
   --ground: #04121A;
   --ground2: #071C25;
   --hair: #143038;
@@ -20,9 +21,10 @@
   --dim: #7B979E;
   --accent: #2FC9C2;
 
-  --font-display: var(--font-display), system-ui, sans-serif;
+  /* Font roles — swap these three to change faces */
+  --font-display: var(--font-display), Georgia, serif;
   --font-body: var(--font-body), system-ui, sans-serif;
-  --font-mono: var(--font-mono), monospace;
+  --font-mono: var(--font-mono), "Courier New", monospace;
 }
 
 @theme inline {
@@ -33,11 +35,14 @@
   --color-prose: var(--prose);
   --color-dim: var(--dim);
   --color-accent: var(--accent);
+  --color-foreground: var(--type);
+
+  /* Tailwind font-role utilities */
   --font-sans: var(--font-body);
   --font-mono: var(--font-mono);
   --font-heading: var(--font-display);
-  --color-foreground: var(--type);
 
+  /* 8px spacing scale */
   --spacing-1: 0.25rem;
   --spacing-2: 0.5rem;
   --spacing-3: 0.75rem;
@@ -68,7 +73,7 @@
 }
 
 .font-display {
-  font-family: var(--font-display), system-ui, sans-serif;
+  font-family: var(--font-display), Georgia, serif;
 }
 
 .font-body {
@@ -76,7 +81,7 @@
 }
 
 .font-mono {
-  font-family: var(--font-mono), monospace;
+  font-family: var(--font-mono), "Courier New", monospace;
 }
 
 /* Scroll Stack (React Bits free catalog) */
@@ -115,4 +120,75 @@
 .scroll-stack-end {
   width: 100%;
   height: 1px;
+}
+
+/* MDX prose — article rendered via next-mdx-remote/rsc */
+article h2 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  letter-spacing: -0.014em;
+  color: var(--type);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+article h3 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.3;
+  letter-spacing: -0.014em;
+  color: var(--type);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+article p {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.74;
+  letter-spacing: 0.005em;
+  color: var(--prose);
+  margin-bottom: 1rem;
+  max-width: 62ch;
+}
+
+article strong {
+  color: var(--type);
+  font-weight: 600;
+}
+
+article em {
+  font-style: italic;
+  color: var(--type);
+}
+
+article ul {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.74;
+  letter-spacing: 0.005em;
+  color: var(--prose);
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  max-width: 62ch;
+}
+
+article li {
+  margin-bottom: 0.25rem;
+}
+
+article a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+article code {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.875em;
+  background: var(--ground2);
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
 }

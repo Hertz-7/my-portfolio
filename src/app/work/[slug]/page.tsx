@@ -86,7 +86,7 @@ export default async function WorkPage({ params }: Props) {
             <p className="font-mono text-[9.5px] tracking-[0.2em] uppercase text-[var(--accent)] mb-4">
               Overview
             </p>
-            <p className="text-[1.02rem] leading-[1.74] tracking-[0.005em] text-[var(--prose)] max-w-[62ch]">
+            <p className="font-body text-[1.02rem] leading-[1.74] tracking-[0.005em] text-[var(--prose)] max-w-[62ch]">
               {entry.summary}
             </p>
           </div>

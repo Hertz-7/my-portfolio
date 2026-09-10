@@ -135,7 +135,7 @@ function PreviewPanel({ entry }: { entry: WorkEntry }) {
       </p>
 
       {/* Summary */}
-      <p className="text-[1.02rem] leading-[1.72] tracking-[0.005em] text-[var(--prose)] mb-5 max-w-[62ch]">
+      <p className="font-body text-[1.02rem] leading-[1.72] tracking-[0.005em] text-[var(--prose)] mb-5 max-w-[62ch]">
         {entry.summary}
       </p>
 
