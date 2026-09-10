@@ -5,3 +5,6 @@ export { Section } from "./Section";
 export { Rule } from "./Rule";
 export { Button } from "./Button";
 export { PlainLink } from "./PlainLink";
+export { CredentialStrip } from "./CredentialStrip";
+export { StackStrip } from "./StackStrip";
+export { HeroSection } from "./HeroSection";
