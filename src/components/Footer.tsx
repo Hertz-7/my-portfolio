@@ -31,6 +31,14 @@ export function Footer() {
           >
             LinkedIn
           </a>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-[10px] tracking-[0.16em] uppercase text-[var(--dim)] hover:text-[var(--accent)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ground)] rounded-sm"
+          >
+            Résumé
+          </a>
         </div>
         <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-[var(--dim)]">
           Islamabad, PK

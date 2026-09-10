@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -20,10 +21,52 @@ const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
+const BASE_URL = "https://mohammadaosaf.com";
+
 export const metadata: Metadata = {
-  title: "Mohammad Aosaf — AI & Full-Stack Engineer",
+  title: {
+    default: "Mohammad Aosaf",
+    template: "%s — Mohammad Aosaf",
+  },
   description:
-    "Portfolio of Mohammad Aosaf — AI & Full-Stack Engineer building production agentic AI systems end to end.",
+    "AI & Full-Stack Engineer building production agentic AI systems end to end — multi-agent reasoning, RAG pipelines, and scalable full-stack platforms.",
+  metadataBase: new URL(BASE_URL),
+  alternates: {
+    canonical: BASE_URL,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: BASE_URL,
+    siteName: "Mohammad Aosaf",
+    title: "Mohammad Aosaf",
+    description:
+      "AI & Full-Stack Engineer building production agentic AI systems end to end.",
+    images: [
+      {
+        url: `${BASE_URL}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: "Mohammad Aosaf — AI & Full-Stack Engineer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mohammad Aosaf",
+    description:
+      "AI & Full-Stack Engineer building production agentic AI systems end to end.",
+    images: [`${BASE_URL}/opengraph-image`],
+    creator: "@Hertz_7",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -38,6 +81,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-[var(--ground)] text-[var(--prose)]">
         {children}
+        <Analytics />
       </body>
     </html>
   );
