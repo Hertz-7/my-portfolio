@@ -38,7 +38,7 @@ export default async function WorkPage({ params }: Props) {
   return (
     <>
       <Header />
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* Case study header */}
         <section className="pt-16 pb-12 border-b border-[var(--hair)]">
           <div className="max-w-[1120px] mx-auto px-6 lg:px-8">

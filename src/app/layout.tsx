@@ -7,18 +7,21 @@ const bricolage = Bricolage_Grotesque({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const ibmPlexSans = IBM_Plex_Sans({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: ["400", "500"],
+  display: "swap",
 });
 
 const BASE_URL = "https://mohammadaosaf.com";
@@ -77,9 +80,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bricolage.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} dark h-full antialiased`}
+      className={`${bricolage.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[var(--ground)] text-[var(--prose)]">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[var(--accent)] focus:text-[var(--ground)] focus:font-mono focus:text-[10px] focus:tracking-[0.18em] focus:uppercase focus:rounded-[2px]"
+        >
+          Skip to content
+        </a>
         {children}
         <Analytics />
       </body>

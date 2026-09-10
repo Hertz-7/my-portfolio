@@ -1,8 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-
-@custom-variant dark (&:is(.dark *));
 
 /*
  * FOUR-TIER TEXT COLOUR SYSTEM — strict rule of the codebase
@@ -16,13 +12,13 @@
  */
 
 :root {
-  --ground: #05100E;
-  --ground2: #081916;
-  --hair: #16302C;
-  --type: #EAF3ED;
-  --prose: #C4D3CC;
-  --dim: #7F9A93;
-  --accent: #3FBF9E;
+  --ground: #04121A;
+  --ground2: #071C25;
+  --hair: #143038;
+  --type: #E6F2F3;
+  --prose: #BFD2D6;
+  --dim: #7B979E;
+  --accent: #2FC9C2;
 
   --font-display: var(--font-display), system-ui, sans-serif;
   --font-body: var(--font-body), system-ui, sans-serif;
@@ -40,6 +36,7 @@
   --font-sans: var(--font-body);
   --font-mono: var(--font-mono);
   --font-heading: var(--font-display);
+  --color-foreground: var(--type);
 
   --spacing-1: 0.25rem;
   --spacing-2: 0.5rem;
