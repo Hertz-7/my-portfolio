@@ -22,8 +22,8 @@ export function Project({ project, index }: ProjectProps) {
         rounded-[6px] border border-transparent
         px-5 py-5 lg:px-6 lg:py-6
         transition-colors duration-200 ease-out
-        hover:border-[rgba(100,130,180,0.12)]
-        hover:bg-[rgba(30,50,85,0.45)]
+        hover:border-[rgba(47,201,194,0.18)]
+        hover:bg-[rgba(20,48,50,0.5)]
       "
     >
       <p className="font-mono text-[11px] font-medium tracking-[0.18em] uppercase text-[var(--mute)] tabular-nums pt-1">
@@ -66,11 +66,11 @@ export function Project({ project, index }: ProjectProps) {
                   className="
                     inline-block px-3 py-1 rounded-full
                     text-[12px] text-[var(--accent)]
-                    bg-[rgba(100,255,218,0.06)]
-                    border border-[rgba(100,255,218,0.12)]
+                    bg-[rgba(47,201,194,0.06)]
+                    border border-[rgba(47,201,194,0.14)]
                     transition-colors duration-200
-                    group-hover:bg-[rgba(100,255,218,0.1)]
-                    group-hover:border-[rgba(100,255,218,0.22)]
+                    group-hover:bg-[rgba(47,201,194,0.1)]
+                    group-hover:border-[rgba(47,201,194,0.24)]
                   "
                 >
                   {tech}

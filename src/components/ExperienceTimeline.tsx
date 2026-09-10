@@ -1,61 +1,88 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion, MotionValue } from "framer-motion";
 import { useRef } from "react";
+
+/**
+ * Desktop curved timeline.
+ *
+ * Lives in the 110px gutter between sidebar and content — never crosses
+ * the readable text. Animates pathLength from 0 → 1 as the user scrolls
+ * past the Experience section, with milestone dots fading in as the
+ * line reaches each one.
+ */
+
+const VIEW_W = 110;
+const VIEW_H = 1000;
+
+const PATH =
+  "M 35 0 C 75 160, 95 300, 55 430 C 15 560, 80 700, 45 820 C 75 900, 60 950, 55 1000";
+
+interface Milestone {
+  y: number;
+  x: number;
+}
+
+const MILESTONES: Milestone[] = [
+  { y: 200, x: 70 },
+  { y: 460, x: 40 },
+  { y: 700, x: 65 },
+  { y: 900, x: 50 },
+];
 
 export function ExperienceTimeline() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.15 });
+  const reduce = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 90%", "end 20%"],
+  });
+
+  const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <div
       ref={ref}
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 hidden lg:block"
+      className="
+        hidden lg:block
+        pointer-events-none
+        absolute
+        top-0 bottom-0
+        -left-[110px]
+        w-[110px]
+        z-0
+      "
     >
       <svg
         width="100%"
         height="100%"
-        viewBox="0 0 100 1000"
+        viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
         preserveAspectRatio="none"
-        className="absolute inset-0"
+        className="block"
       >
-        <defs>
-          <linearGradient id="tl-fade" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#64ffda" stopOpacity="0" />
-            <stop offset="15%" stopColor="#64ffda" stopOpacity="0.55" />
-            <stop offset="85%" stopColor="#64ffda" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="#64ffda" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-
         <motion.path
-          d="M 35 0 C 80 220, -10 420, 55 620 C 100 780, 30 880, 60 1000"
+          d={PATH}
           fill="none"
-          stroke="url(#tl-fade)"
-          strokeWidth="0.6"
+          stroke="var(--accent)"
+          strokeWidth="1"
           strokeLinecap="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={inView ? { pathLength: 1, opacity: 1 } : {}}
-          transition={{ duration: 1.6, ease: "easeInOut" }}
+          strokeOpacity={0.35}
+          style={
+            reduce
+              ? { pathLength: 1, opacity: 1 }
+              : { pathLength, opacity: 0.95 }
+          }
         />
 
-        {[0.18, 0.42, 0.66, 0.88].map((p, i) => (
-          <motion.circle
+        {MILESTONES.map((m, i) => (
+          <MilestoneDot
             key={i}
-            cx={35 + (i % 2 === 0 ? 0 : 20)}
-            cy={p * 1000}
-            r={2.4}
-            fill="#0b1428"
-            stroke="#64ffda"
-            strokeWidth={0.5}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={inView ? { scale: 1, opacity: 0.9 } : {}}
-            transition={{
-              duration: 0.4,
-              ease: "easeOut",
-              delay: 0.5 + i * 0.12,
-            }}
+            progress={scrollYProgress}
+            cx={m.x}
+            cy={m.y}
+            reduce={reduce}
           />
         ))}
       </svg>
@@ -63,22 +90,68 @@ export function ExperienceTimeline() {
   );
 }
 
+function MilestoneDot({
+  progress,
+  cx,
+  cy,
+  reduce,
+}: {
+  progress: MotionValue<number>;
+  cx: number;
+  cy: number;
+  reduce: boolean | null;
+}) {
+  const gate = useTransform(
+    progress,
+    [
+      Math.max(0, cy / VIEW_H - 0.06),
+      Math.min(1, cy / VIEW_H + 0.02),
+    ],
+    [0, 1]
+  );
+  return (
+    <motion.circle
+      cx={cx}
+      cy={cy}
+      r={2.2}
+      fill="var(--ground)"
+      stroke="var(--accent)"
+      strokeWidth={0.7}
+      strokeOpacity={0.6}
+      style={{
+        opacity: reduce ? 0.9 : gate,
+        scale: reduce ? 1 : gate,
+      }}
+    />
+  );
+}
+
+/**
+ * Mobile fallback — single vertical accent line running along the left
+ * edge of the experience list. No curve; never crosses content.
+ */
 export function ExperienceTimelineMobile() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.1 });
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 90%", "end 20%"],
+  });
+  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <div
       ref={ref}
       aria-hidden="true"
-      className="pointer-events-none absolute left-6 top-0 bottom-0 w-px lg:hidden"
+      className="lg:hidden pointer-events-none absolute left-2 top-0 bottom-0 w-px"
     >
       <motion.div
-        initial={{ scaleY: 0 }}
-        animate={inView ? { scaleY: 1 } : {}}
-        transition={{ duration: 1.4, ease: "easeInOut" }}
-        style={{ transformOrigin: "top" }}
-        className="h-full w-full bg-[var(--accent)]/45"
+        className="h-full w-full bg-[var(--accent)]"
+        style={{
+          scaleY: reduce ? 1 : scaleY,
+          opacity: 0.35,
+          transformOrigin: "top",
+        }}
       />
     </div>
   );

@@ -1,32 +1,36 @@
 @import "tailwindcss";
 
 /*
- * Brittany-style navy palette.
+ * Teal palette — restored from the project's design system.
  *
- *  ground  page background          — near-black navy
- *  surface slightly raised panels   — one tonal step above ground
- *  hair   1px separators            — barely-visible navy line
- *  light  headings & strong text    — near-white
- *  slate  body copy                  — muted blue-gray
- *  mute   labels, eyebrows, dates    — dimmer blue-gray
- *  accent interactive accent         — soft cyan-teal
+ *  ground  page background         — abyssal teal-black
+ *  ground2 slightly raised panels  — one tonal step above ground
+ *  hair   1px separators           — barely-visible teal line
+ *  type   headings & strong text   — near-white
+ *  prose  body copy                 — muted teal-gray
+ *  dim    labels, eyebrows, dates  — dimmer teal-gray
+ *  accent interactive accent       — luminous teal
  */
 
 :root {
-  --ground: #0b1428;
-  --ground2: #112240;
-  --surface: #1a2a4a;
-  --hair: #1e3559;
-  --light: #ccd6f6;
-  --slate: #8892b0;
-  --mute: #495670;
-  --accent: #64ffda;
+  --ground: #04121A;
+  --ground2: #071C25;
+  --surface: #0A2028;
+  --hair: #143038;
+  --type: #E6F2F3;
+  --prose: #BFD2D6;
+  --dim: #7B979E;
+  --accent: #2FC9C2;
 
-  /* Legacy aliases — kept so /work/[slug] case study
-   * (which still uses the older four-tier naming) renders correctly. */
-  --type: var(--light);
-  --prose: var(--slate);
-  --dim: var(--mute);
+  /* Brittany-friendly aliases used by the new component tree */
+  --light: var(--type);
+  --slate: var(--prose);
+  --mute: var(--dim);
+
+  /* Font stacks */
+  --stack-display: var(--font-display), "Bricolage Grotesque", Georgia, serif;
+  --stack-body: var(--font-body), "IBM Plex Sans", system-ui, sans-serif;
+  --stack-mono: var(--font-mono-src), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 @theme inline {
@@ -34,21 +38,19 @@
   --color-surface: var(--ground2);
   --color-elevated: var(--surface);
   --color-hair: var(--hair);
-  --color-light: var(--light);
-  --color-slate: var(--slate);
-  --color-mute: var(--mute);
+  --color-light: var(--type);
+  --color-slate: var(--prose);
+  --color-mute: var(--dim);
   --color-accent: var(--accent);
-  --color-foreground: var(--light);
-  --color-type: var(--light);
-  --color-prose: var(--slate);
-  --color-dim: var(--mute);
+  --color-foreground: var(--type);
+  --color-type: var(--type);
+  --color-prose: var(--prose);
+  --color-dim: var(--dim);
   --color-ground2: var(--ground2);
 
-  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
-
-  /* Legacy font stacks for case-study fallback */
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-heading: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-sans: var(--stack-body);
+  --font-mono: var(--stack-mono);
+  --font-heading: var(--stack-display);
 }
 
 @layer base {
@@ -57,29 +59,35 @@
   }
   body {
     background-color: var(--ground);
-    color: var(--slate);
-    font-family: var(--font-inter), "Inter", system-ui, sans-serif;
+    color: var(--prose);
+    font-family: var(--stack-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   html {
-    font-family: var(--font-inter), "Inter", system-ui, sans-serif;
+    font-family: var(--stack-body);
     scroll-behavior: smooth;
   }
   ::selection {
-    background-color: rgba(100, 255, 218, 0.18);
-    color: var(--light);
+    background-color: rgba(47, 201, 194, 0.22);
+    color: var(--type);
   }
 }
 
-/* Portfolio layout — sticky sidebar + scrolling main column */
+/* Portfolio layout — sticky sidebar + scrolling main column.
+ *
+ * Desktop grid: sidebar | 110px gap | content. The timeline
+ * lives as an absolute layer inside the content column but pinned
+ * to its LEFT edge so it sits in the gap, not over the text.
+ */
 
 .portfolio-shell {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+  position: relative;
 }
 
 @media (min-width: 768px) {
@@ -92,10 +100,16 @@
 @media (min-width: 1024px) {
   .portfolio-shell {
     display: grid;
-    grid-template-columns: 40% 60%;
-    gap: 3rem;
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+    column-gap: 110px;
     padding-left: 3rem;
     padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .portfolio-shell {
+    column-gap: 130px;
   }
 }
 
@@ -116,16 +130,18 @@
 }
 
 .portfolio-main {
+  position: relative;
   padding-top: 4rem;
   padding-bottom: 6rem;
   min-width: 0;
+  max-width: 62ch;
 }
 
 @media (min-width: 1024px) {
   .portfolio-main {
-    padding-top: 6rem;
+    padding-top: 8rem;
     padding-bottom: 6rem;
-    max-width: 650px;
+    max-width: 62ch;
   }
 }
 
