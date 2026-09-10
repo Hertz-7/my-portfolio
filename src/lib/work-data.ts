@@ -15,7 +15,7 @@ export const WORK_INDEX: WorkEntry[] = [
   {
     slug: "qlu",
     title: "QLU.ai",
-    roleLabel: "Senior Full Stack Engineer — led a team of 3",
+    roleLabel: "Senior Full Stack Engineer — led 3 engineers + 2 QA across a business unit of 3 products",
     period: "2024–2026",
     summary:
       "AI-native executive sourcing platform. Natural-language candidate search over millions of profiles, an event-driven outreach system, and a Twilio dialer carrying an autonomous voice SDR.",

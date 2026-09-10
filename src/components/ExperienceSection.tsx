@@ -13,7 +13,7 @@ const EXPERIENCE = [
     role: "Senior Full Stack Engineer",
     company: "QLU.ai",
     period: "Jul 2024 — Jan 2026",
-    note: "Led a team of 3",
+    note: "Led engineering for a business unit of 3 products (Dialer, Outreach, AI Voice SDR), 3 engineers + 2 QA",
   },
   {
     number: "03",
