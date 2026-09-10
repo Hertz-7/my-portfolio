@@ -4,19 +4,19 @@ import { motion, useScroll, useTransform, useReducedMotion, MotionValue } from "
 import { useRef } from "react";
 
 /**
- * Desktop curved timeline.
+ * Decorative curved timeline.
  *
- * Anchored to the entire main column so it animates 0 → 1 across the full
- * scroll (About → Experience → Projects → Footer) and stays at 1 once the
- * user reaches the end of the page. Sits in the gutter between sidebar
- * and content — never crosses the readable text.
+ * Anchored to the entire right column so the curve keeps drawing as the
+ * user scrolls through About → Experience → Projects → Footer. Once the
+ * bottom of the column passes the top of the viewport it clamps at
+ * pathLength: 1. Lives in the 110px gutter — never crosses text.
  */
 
 const VIEW_W = 110;
-const VIEW_H = 1400;
+const VIEW_H = 1600;
 
 const PATH =
-  "M 35 0 C 90 140, 95 280, 50 420 C 5 560, 90 700, 45 840 C 70 960, 30 1080, 60 1200 C 90 1320, 50 1380, 55 1400";
+  "M 35 0 C 90 160, 95 320, 50 480 C 5 640, 90 800, 45 960 C 70 1080, 30 1200, 60 1320 C 90 1440, 50 1540, 55 1600";
 
 interface Milestone {
   y: number;
@@ -25,21 +25,17 @@ interface Milestone {
 
 const MILESTONES: Milestone[] = [
   { y: 180, x: 75 },
-  { y: 380, x: 45 },
-  { y: 620, x: 80 },
-  { y: 820, x: 50 },
-  { y: 1020, x: 75 },
-  { y: 1240, x: 55 },
+  { y: 420, x: 45 },
+  { y: 660, x: 80 },
+  { y: 900, x: 50 },
+  { y: 1140, x: 75 },
+  { y: 1380, x: 55 },
 ];
 
 export function ExperienceTimeline() {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
-  // Anchor to the timeline container itself so the curve carries
-  // through the entire scroll range of the main column, and clamps
-  // at pathLength: 1 once the bottom of the column passes the top
-  // 20% of the viewport — i.e. once the user has reached the end.
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 95%", "end 20%"],
@@ -109,9 +105,6 @@ function MilestoneDot({
   cy: number;
   reduce: boolean | null;
 }) {
-  // Each dot fades in over a narrow band of scroll progress centred
-  // on its position. The last input/output pair is [1, 1] so once the
-  // user reaches the end of the scroll the dot stays fully visible.
   const gate = useTransform(
     progress,
     [
@@ -139,10 +132,6 @@ function MilestoneDot({
   );
 }
 
-/**
- * Mobile fallback — single vertical accent line running along the left
- * edge of the experience list. No curve; never crosses content.
- */
 export function ExperienceTimelineMobile() {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
