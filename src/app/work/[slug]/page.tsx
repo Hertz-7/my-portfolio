@@ -66,6 +66,24 @@ const mdxComponents = {
     />
   ),
   hr: () => <hr className="my-12 border-t border-[var(--hair)]" />,
+  img: ({ src, alt }: React.ComponentProps<"img">) => (
+    <figure className="my-10">
+      <div className="overflow-hidden rounded-[6px] border border-[var(--hair)] bg-[var(--ground2)]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={typeof src === "string" ? src : ""}
+          alt={alt ?? ""}
+          loading="lazy"
+          className="block w-full h-auto"
+        />
+      </div>
+      {alt && (
+        <figcaption className="mt-3 font-mono text-[10px] tracking-[0.16em] uppercase text-[var(--dim)]">
+          {alt}
+        </figcaption>
+      )}
+    </figure>
+  ),
 };
 
 interface Props {
@@ -143,6 +161,23 @@ export default async function WorkPage({ params }: Props) {
           </div>
         </section>
 
+        {/* Hero image */}
+        {entry.heroImage && (
+          <section className="border-b border-[var(--hair)]">
+            <div className="max-w-[1120px] mx-auto px-6 lg:px-8 py-10">
+              <div className="overflow-hidden rounded-[8px] border border-[var(--hair)] bg-[var(--ground2)]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={entry.heroImage}
+                  alt={entry.heroImageAlt ?? entry.title}
+                  loading="lazy"
+                  className="block w-full h-auto"
+                />
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Summary */}
         <section className="py-12 border-b border-[var(--hair)]">
           <div className="max-w-[1120px] mx-auto px-6 lg:px-8">
@@ -165,47 +200,38 @@ export default async function WorkPage({ params }: Props) {
         </section>
 
         {/* Scroll Stack highlights */}
-        <section className="py-16 border-t border-[var(--hair)]">
-          <div className="max-w-[1120px] mx-auto px-6 lg:px-8">
-            <p className="font-mono text-[9.5px] tracking-[0.2em] uppercase text-[var(--accent)] mb-8">
-              Highlights
-            </p>
-            <ScrollStack
-              itemDistance={80}
-              itemScale={0.04}
-              itemStackDistance={40}
-              stackPosition="30%"
-              scaleEndPosition="15%"
-              baseScale={0.88}
-              blurAmount={2}
-            >
-              <ScrollStackItem itemClassName="bg-[var(--ground2)] border border-[var(--hair)] p-8 rounded-xl min-h-[14rem]">
-                <h3 className="font-display font-bold text-[var(--type)] text-[1.2rem] leading-[1.2] tracking-[-0.014em] mb-3">
-                  Multi-Agent Orchestration
-                </h3>
-                <p className="text-[1.02rem] leading-[1.72] tracking-[0.005em] text-[var(--prose)]">
-                  Five specialised reasoning agents — medical, legal, financial, risk, ethics — coordinated conditionally per case signals across six clinical pathways.
-                </p>
-              </ScrollStackItem>
-              <ScrollStackItem itemClassName="bg-[var(--ground2)] border border-[var(--hair)] p-8 rounded-xl min-h-[14rem]">
-                <h3 className="font-display font-bold text-[var(--type)] text-[1.2rem] leading-[1.2] tracking-[-0.014em] mb-3">
-                  RAG Pipeline
-                </h3>
-                <p className="text-[1.02rem] leading-[1.72] tracking-[0.005em] text-[var(--prose)]">
-                  MTUS/ACOEM guidelines retrieval: PDF ingestion, section-aware chunking, HNSW vector search, two-step LLM retrieval with citation checking.
-                </p>
-              </ScrollStackItem>
-              <ScrollStackItem itemClassName="bg-[var(--ground2)] border border-[var(--hair)] p-8 rounded-xl min-h-[14rem]">
-                <h3 className="font-display font-bold text-[var(--type)] text-[1.2rem] leading-[1.2] tracking-[-0.014em] mb-3">
-                  Tenant Isolation
-                </h3>
-                <p className="text-[1.02rem] leading-[1.72] tracking-[0.005em] text-[var(--prose)]">
-                  PostgreSQL Row-Level Security with JWT-derived tenant context across 11 data domains, validated by automated isolation tests on every PR.
-                </p>
-              </ScrollStackItem>
-            </ScrollStack>
-          </div>
-        </section>
+        {entry.highlights && entry.highlights.length > 0 && (
+          <section className="py-16 border-t border-[var(--hair)]">
+            <div className="max-w-[1120px] mx-auto px-6 lg:px-8">
+              <p className="font-mono text-[9.5px] tracking-[0.2em] uppercase text-[var(--accent)] mb-8">
+                Highlights
+              </p>
+              <ScrollStack
+                itemDistance={80}
+                itemScale={0.04}
+                itemStackDistance={40}
+                stackPosition="30%"
+                scaleEndPosition="15%"
+                baseScale={0.88}
+                blurAmount={2}
+              >
+                {entry.highlights.map((h, i) => (
+                  <ScrollStackItem
+                    key={i}
+                    itemClassName="bg-[var(--ground2)] border border-[var(--hair)] p-8 rounded-xl min-h-[14rem]"
+                  >
+                    <h3 className="font-display font-bold text-[var(--type)] text-[1.2rem] leading-[1.2] tracking-[-0.014em] mb-3">
+                      {h.title}
+                    </h3>
+                    <p className="text-[1.02rem] leading-[1.72] tracking-[0.005em] text-[var(--prose)]">
+                      {h.body}
+                    </p>
+                  </ScrollStackItem>
+                ))}
+              </ScrollStack>
+            </div>
+          </section>
+        )}
 
         {/* Back link */}
         <section className="py-12 border-t border-[var(--hair)]">

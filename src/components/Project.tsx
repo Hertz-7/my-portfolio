@@ -39,8 +39,20 @@ export function Project({ project, index }: ProjectProps) {
         </p>
 
         <div className="flex flex-col gap-3 sm:gap-4">
+          {project.image && (
+            <div className="overflow-hidden rounded-[6px] border border-[var(--hair)] bg-[var(--ground2)]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={project.image}
+                alt={project.imageAlt ?? project.title}
+                loading="lazy"
+                className="block w-full h-auto"
+              />
+            </div>
+          )}
+
           <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-            <h3 className="text-[var(--type)] font-medium text-[1.0625rem] leading-[1.4] tracking-[-0.005em]">
+            <h3 className="text-[var(--type)] font-medium text-[1.0625rem] sm:text-[1.0625rem] leading-[1.4] tracking-[-0.005em]">
               {project.title}
             </h3>
             {project.href && (
@@ -66,9 +78,9 @@ export function Project({ project, index }: ProjectProps) {
             {project.description}
           </p>
 
-          {project.technologies && project.technologies.length > 0 && (
+          {project.tech && project.tech.length > 0 && (
             <ul className="flex flex-wrap gap-2 pt-1">
-              {project.technologies.map((tech) => (
+              {project.tech.map((tech) => (
                 <li key={tech}>
                   <span
                     className="
