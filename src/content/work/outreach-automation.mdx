@@ -1,0 +1,50 @@
+---
+title: "Outreach Automation"
+roleLabel: "QLU.ai — end-to-end architecture"
+period: "2024–2026"
+summary: "Event-driven outreach system with campaign workflows, scheduling logic, and Redis-backed background jobs. Redis pub/sub fan-out delivers real-time status updates to the dashboard as each touch executes."
+tags:
+  - Node.js
+  - Express
+  - Redis
+  - BullMQ
+  - WebSockets
+links:
+  - label: "Visit ↗"
+    href: "https://www.qlu.ai/outreach"
+order: 4
+---
+
+## Problem
+
+QLU's outreach product had to run thousands of sequenced touches per campaign — emails, LinkedIn steps, call tasks — across hundreds of active campaigns, all coordinated against recruiter availability windows, candidate seniority, industry, and prior engagement history. The existing execution layer was synchronous and brittle: a single failed touch could stall a campaign, and recruiters had no real-time view into what was actually happening.
+
+## Approach
+
+Owned the end-to-end architecture: modelled campaigns as event-driven workflows, moved all execution to Redis-backed background jobs, and added a real-time status channel on Redis pub/sub so the dashboard reflects every touch the moment it executes.
+
+## What I Built
+
+### Campaign Workflows
+
+Campaigns are modelled as directed workflows of touches — each node specifies a channel (email, LinkedIn, call task), a step condition, and a delay. The scheduler walks the graph per candidate and enqueues the next touch when the previous one's result (sent, opened, replied, bounced) satisfies the condition.
+
+### Scheduling Logic
+
+A scheduler matches touches to recruiter availability windows, candidate timezone, and seniority-based send windows (no weekend emails to senior execs, etc.). Candidates are excluded if they're already in another live campaign for the same role, and re-entry rules prevent the same candidate from receiving overlapping sequences.
+
+### Redis-Backed Background Jobs
+
+All touch execution runs through BullMQ on Redis. Workers pull jobs, execute the touch against the channel provider, write the result back, and enqueue the next step in the workflow. Failed jobs retry with exponential backoff, and a dead-letter queue captures touches that fail after max retries for manual review.
+
+### Real-Time Status via Redis Pub/Sub
+
+Every touch execution publishes a status event to a Redis pub/sub channel keyed per campaign and per user. The dashboard subscribes via WebSockets and re-renders campaign state in place — no polling. Recruiters see opens, replies, and bounces as they happen.
+
+## Stack
+
+Node.js · Express · Redis · BullMQ · WebSockets · PostgreSQL · GCP
+
+## Impact
+
+Replaced a synchronous, brittle execution layer with an event-driven system that runs thousands of touches per campaign across hundreds of active campaigns. The pub/sub status channel is the foundation the AI Voice SDR product extends for live call updates.

@@ -1,0 +1,49 @@
+---
+title: "AI People Search"
+roleLabel: "QLU.ai — core revenue product"
+period: "2024–2026"
+summary: "Natural-language candidate search over millions of executive profiles. Freeform queries are translated into optimised SQL and Elasticsearch; query optimisation work delivered up to 90% latency reduction on complex searches."
+tags:
+  - React
+  - NestJS
+  - PostgreSQL
+  - Elasticsearch
+links:
+  - label: "Visit ↗"
+    href: "https://www.qlu.ai/"
+order: 3
+---
+
+## Problem
+
+QLU's core revenue product had to support natural-language candidate search across millions of executive profiles — and every search backed a multi-million-dollar deal cycle. Median latency on complex queries was high enough that recruiters were dropping off before results rendered, and the existing query path was an opaque chain of hand-tuned SQL fragments with no shared optimisation strategy.
+
+## Approach
+
+Owned the architecture and delivered the key features behind the search. The work spanned three layers: the natural-language query layer that translates a freeform request into a structured plan, the query engine that fans that plan out into PostgreSQL and Elasticsearch, and the result-shaping layer that reconciles both stores into the ranked candidate set the UI consumes.
+
+## What I Built
+
+### Natural-Language Query Layer
+
+A pipeline that takes a freeform recruiter prompt — "Find CMOs at Series B healthtech in the US with prior exits" — and decomposes it into a structured query plan with role, stage, geography, and signal filters. The plan drives both the relational and the search query that run in parallel.
+
+### Hybrid SQL + Elasticsearch Engine
+
+Each query plan runs against two stores in parallel. PostgreSQL handles structured filters and the join against the candidate graph; Elasticsearch handles full-text and facet matching on the profile corpus. Results are merged with a weighted score and reconciled against the user's plan so the returned candidates carry back the filters that matched.
+
+### Query Optimisation
+
+Profiled the slow paths in the existing query engine and rewrote the worst offenders. The most expensive queries — multi-join candidate graph traversals with correlated filters — were reduced by up to **90%** on latency, dropping complex search p95 from multi-second to sub-second on the same data volume.
+
+### Frontend Search Experience
+
+Built the recruiter-facing search surface in React with NestJS powering the API. The UI shows the interpreted query plan alongside results so recruiters can correct or refine filters directly — turning the search box into a structured query builder when needed.
+
+## Stack
+
+React · NestJS · PostgreSQL · Elasticsearch · Node.js · GCP
+
+## Impact
+
+AI People Search is QLU's primary revenue product, supporting multi-million-dollar deal cycles. Query optimisation work made complex searches sub-second, and the structured query plan layer is the foundation every other QLU product extends.

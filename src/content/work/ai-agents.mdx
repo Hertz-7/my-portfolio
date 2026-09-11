@@ -1,0 +1,41 @@
+---
+title: "AI Agents"
+roleLabel: "QLU.ai — MVP architecture & delivery"
+period: "2024–2026"
+summary: "Rapid MVP for QLU's new AI Agents application — frontend and backend architecture using React, Node.js, and Express."
+tags:
+  - React
+  - Node.js
+  - Express
+  - PostgreSQL
+links:
+  - label: "QLU.ai ↗"
+    href: "https://www.qlu.ai/"
+order: 6
+---
+
+## Problem
+
+QLU needed a new AI Agents product line and a working MVP fast — something the sales team could demo, with a foundation the engineering team could extend without re-platforming a few months later.
+
+## Approach
+
+Took the MVP end-to-end: chose the stack to match what the rest of QLU already ran, set up the monorepo structure, and shipped the architecture that the team would build the rest of the product on top of.
+
+## What I Built
+
+### Frontend & Backend Architecture
+
+React frontend with Node.js / Express services against a shared PostgreSQL instance. The same auth and RBAC patterns QLU already used in the auth microservice were extended to the new product, so the operations team could manage users from one place.
+
+### MVP Features
+
+Shipped the core agent surface area that the sales demo needed: agent configuration, conversation history, and integration with the auth and billing systems QLU already had in production.
+
+## Stack
+
+React · Node.js · Express · PostgreSQL · GCP
+
+## Impact
+
+Gave QLU's sales team a demo they could run with prospects on day one, and the engineering team a foundation they could extend without ripping out the auth, billing, or deployment layers a few months later.

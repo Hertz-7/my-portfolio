@@ -71,9 +71,16 @@ export function ExperienceItem({ item, index }: ExperienceItemProps) {
             )}
           </div>
 
-          <p className="text-[var(--prose)] text-[1rem] leading-[1.7]">
-            {item.description}
-          </p>
+          <ul className="flex flex-col gap-2 pl-4 list-disc marker:text-[var(--accent)]">
+            {item.description.map((point, i) => (
+              <li
+                key={i}
+                className="text-[var(--prose)] text-[0.95rem] leading-[1.65] tracking-[0.005em]"
+              >
+                {point}
+              </li>
+            ))}
+          </ul>
 
           {item.links && item.links.length > 0 && (
             <ul className="flex flex-wrap gap-x-4 sm:gap-x-5 gap-y-1.5 pt-1">

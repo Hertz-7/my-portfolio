@@ -1,7 +1,17 @@
 import { MetadataRoute } from "next";
+import { WORK_INDEX } from "@/lib/work-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const BASE = "https://mohammadaosaf.com";
+
+  const caseStudies = WORK_INDEX.filter(
+    (entry) => entry.slug !== "theoai" && entry.slug !== "newsbiasdetect",
+  ).map((entry) => ({
+    url: `${BASE}/work/${entry.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
 
   return [
     {
@@ -10,17 +20,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
-    {
-      url: `${BASE}/work/chironom`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${BASE}/work/qlu`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
+    ...caseStudies,
   ];
 }
