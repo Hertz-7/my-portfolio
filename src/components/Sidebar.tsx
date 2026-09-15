@@ -6,8 +6,8 @@ import { SocialLinks } from "./SocialLinks";
 
 const NAV_ITEMS = [
   { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
+  { label: "Experience", href: "#experience" },
 ];
 
 export function Sidebar() {
@@ -19,8 +19,8 @@ export function Sidebar() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="flex flex-col gap-5 lg:gap-6"
       >
-        <header className="flex flex-col gap-3 max-w-[320px]">
-          <h1 className="text-[var(--type)] font-display font-bold leading-[1.05] tracking-[-0.028em] text-[clamp(2.25rem,4.4vw,3.4rem)]">
+        <header className="flex flex-col gap-3 w-full max-w-xs">
+          <h1 className="text-[var(--type)] font-display font-bold leading-[1.05] tracking-tight text-2xl lg:text-3xl">
             Mohammad&nbsp;Aosaf
           </h1>
           <p className="text-[var(--type)] text-[1.0625rem] leading-[1.3] font-medium">

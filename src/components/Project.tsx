@@ -18,7 +18,7 @@ export function Project({ project, index }: ProjectProps) {
       transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.05 }}
       className="
         group relative
-        rounded-[6px] border border-[var(--hair)] bg-[var(--ground2)]
+        rounded-[6px]
         px-4 py-5 sm:px-5 sm:py-5 lg:px-6 lg:py-6
         transition-colors duration-200 ease-out
         hover:border-[rgba(47,201,194,0.32)]
@@ -26,14 +26,12 @@ export function Project({ project, index }: ProjectProps) {
       "
     >
       <div
-        className="
-          grid grid-cols-1 gap-y-3
-          lg:grid lg:grid-cols-[160px_1fr] lg:gap-x-8 lg:gap-y-0
+        className=" 
         "
       >
         <p className="
           hidden lg:block font-mono text-[11px] font-medium tracking-[0.18em] uppercase
-          text-[var(--dim)] tabular-nums pt-1
+          text-[var(--dim)] tabular-nums
         ">
           0{index + 1}
         </p>
@@ -51,12 +49,12 @@ export function Project({ project, index }: ProjectProps) {
             </div>
           )}
 
-          <div className="flex flex-col gap-3 sm:gap-4 min-w-0 flex-1 max-w-xl">
+          <div className="flex flex-col gap-2.5 sm:gap-3 min-w-0 flex-1 max-w-xl">
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
               <span className="lg:hidden font-mono text-[11px] font-medium tracking-[0.18em] uppercase text-[var(--dim)] tabular-nums">
                 0{index + 1}
               </span>
-              <h3 className="text-[var(--type)] font-medium text-[1.0625rem] sm:text-[1.0625rem] leading-[1.4] tracking-[-0.005em]">
+              <h3 className="text-[var(--type)] font-medium text-[1.0625rem] sm:text-[1.0625rem] leading-[1.3] tracking-[-0.005em]">
                 {project.title}
               </h3>
               {project.href && (
@@ -83,7 +81,7 @@ export function Project({ project, index }: ProjectProps) {
             </p>
 
             {project.tech && project.tech.length > 0 && (
-              <ul className="flex flex-wrap gap-2 pt-1">
+              <ul className="flex flex-wrap gap-2">
                 {project.tech.map((tech) => (
                   <li key={tech}>
                     <span

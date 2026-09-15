@@ -18,16 +18,16 @@ export function Header() {
             About
           </Link>
           <Link
-            href="/#experience"
-            className="text-[10px] tracking-[0.18em] uppercase text-[var(--slate)] hover:text-[var(--accent)] transition-colors"
-          >
-            Experience
-          </Link>
-          <Link
             href="/#projects"
             className="text-[10px] tracking-[0.18em] uppercase text-[var(--slate)] hover:text-[var(--accent)] transition-colors"
           >
             Projects
+          </Link>
+          <Link
+            href="/#experience"
+            className="text-[10px] tracking-[0.18em] uppercase text-[var(--slate)] hover:text-[var(--accent)] transition-colors"
+          >
+            Experience
           </Link>
         </nav>
       </div>

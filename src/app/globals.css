@@ -84,8 +84,8 @@
 .portfolio-shell {
   width: 100%;
   max-width: 1240px;
-  margin: 0 auto;
-  padding: 1.5rem 1.25rem 0;
+  margin: 0 auto; 
+  padding: 0 1.25rem 0;
   position: relative;
 }
 
@@ -108,7 +108,7 @@
     display: grid;
     grid-template-columns: minmax(240px, 0.7fr) minmax(0, 1.6fr);
     column-gap: 72px;
-    padding: 1.5rem 3rem 0;
+    padding: 0 3rem 0;
   }
 }
 
@@ -126,6 +126,7 @@
 }
 
 .portfolio-sidebar {
+  margin: 32px;
   display: flex;
   flex-direction: column;
   padding-bottom: 2rem;
@@ -134,10 +135,10 @@
 @media (min-width: 1024px) {
   .portfolio-sidebar {
     position: sticky;
-    top: 0;
+    top: 32px;
     align-self: start;
     height: 100vh;
-    padding-top: 1.75rem;
+    padding-top: 0;
     padding-bottom: 4rem;
   }
 }
@@ -151,7 +152,7 @@
 
 @media (min-width: 1024px) {
   .portfolio-main {
-    padding-top: 2rem;
+    padding-top: 0;
     padding-bottom: 3rem;
     max-width: 760px;
   }

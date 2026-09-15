@@ -20,27 +20,53 @@ export function Navigation({ items, orientation = "vertical" }: NavigationProps)
     const sectionIds = items.map((i) => i.href.replace("#", ""));
     const sections = sectionIds
       .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
+      .filter((el): el is HTMLElement => el !== null)
+      // Follow actual DOM order, not the nav array order.
+      .sort((a, b) => a.offsetTop - b.offsetTop);
 
     if (sections.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort(
-            (a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0)
-          )[0];
-        if (visible) setActive(`#${visible.target.id}`);
-      },
-      {
-        rootMargin: "-30% 0px -55% 0px",
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-      }
-    );
+    // View line: a section becomes active the moment its top edge
+    // crosses 30% from the top of the viewport.
+    const VIEW_LINE_RATIO = 0.3;
 
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      const line = window.innerHeight * VIEW_LINE_RATIO;
+
+      let current = `#${sections[0].id}`;
+      for (const s of sections) {
+        if (s.getBoundingClientRect().top <= line) {
+          current = `#${s.id}`;
+        }
+      }
+
+      // Bottom-of-page guard: once the footer is reached, the last
+      // section stays active even if its top never crosses the line.
+      const doc = document.documentElement;
+      if (window.innerHeight + window.scrollY >= doc.scrollHeight - 2) {
+        current = `#${sections[sections.length - 1].id}`;
+      }
+
+      setActive((prev) => (prev === current ? prev : current));
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, [items]);
 
   if (orientation === "horizontal") {
