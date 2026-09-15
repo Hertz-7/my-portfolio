@@ -20,7 +20,7 @@ export function ExperienceItem({ item, index }: ExperienceItemProps) {
         ease: "easeOut",
         delay: index * 0.05,
       }}
-      className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8 transition-colors duration-200"
+      className="group flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8 transition-colors duration-200"
     >
       {/* Date column */}
       <div className="sm:w-32 flex-shrink-0">
@@ -38,18 +38,20 @@ export function ExperienceItem({ item, index }: ExperienceItemProps) {
             <span className="text-slate-500 mx-1">·</span>
             <span>{item.company}</span>
           </h3>
-          {item.href && (
-            <a
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${item.company} — opens in a new tab`}
-              className="inline-flex items-center text-slate-500 hover:text-accent transition-transform duration-200 focus-visible:outline-none group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transition-none"
-            >
-              <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.5} />
-            </a>
-          )}
+          <span className="text-slate-500 transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transition-none">
+            <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.5} />
+          </span>
         </div>
+        {item.href && (
+          <a
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${item.company} — opens in a new tab`}
+            className="absolute inset-0 z-10"
+            tabIndex={-1}
+          />
+        )}
 
         {/* Description points */}
         <ul className="flex flex-col gap-2 pl-4 list-disc marker:text-accent">

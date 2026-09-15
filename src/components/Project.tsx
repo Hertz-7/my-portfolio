@@ -16,7 +16,7 @@ export function Project({ project, index }: ProjectProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.05 }}
-      className="relative flex flex-col sm:flex-row items-start gap-4 sm:gap-6"
+      className="group relative flex flex-col sm:flex-row items-start gap-4 sm:gap-6"
     >
       {/* Image thumbnail — explicit width, top-aligned */}
       {project.image && (
@@ -36,22 +36,14 @@ export function Project({ project, index }: ProjectProps) {
       {/* Project content — fills remaining width */}
       <div className="flex-1 min-w-0">
         <div className="flex flex-col gap-1">
-          {/* Title with external link */}
-            <div className="flex items-baseline gap-3">
-              <h3 className="font-semibold text-slate-200 text-base leading-snug group-hover:text-teal-300 transition-colors duration-200">
-                {project.title}
-              </h3>
-              {project.href && (
-                <a
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${project.title} — opens in a new tab`}
-                  className="text-slate-400 hover:text-accent transition-transform duration-200 focus-visible:outline-none group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transition-none"
-                >
-                <ArrowUpRight className="w-4 h-4" strokeWidth={1.5} />
-              </a>
-            )}
+          {/* Title row */}
+          <div className="flex items-baseline gap-3">
+            <h3 className="font-semibold text-slate-200 text-base leading-snug group-hover:text-teal-300 transition-colors duration-200">
+              {project.title}
+            </h3>
+            <span className="text-slate-400 transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transition-none">
+              <ArrowUpRight className="w-4 h-4" strokeWidth={1.5} />
+            </span>
           </div>
 
           {/* Description */}
@@ -73,6 +65,18 @@ export function Project({ project, index }: ProjectProps) {
           )}
         </div>
       </div>
+
+      {/* Stretched link overlay — makes entire card clickable */}
+      {project.href && (
+        <a
+          href={project.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${project.title} — opens in a new tab`}
+          className="absolute inset-0 z-10"
+          tabIndex={-1}
+        />
+      )}
     </motion.article>
   );
 }
