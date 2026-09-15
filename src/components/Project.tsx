@@ -18,11 +18,11 @@ export function Project({ project, index }: ProjectProps) {
       transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.05 }}
       className="
         group relative
-        rounded-[6px] border border-transparent
-        px-0 py-5 sm:px-5 sm:py-5 lg:px-6 lg:py-6
+        rounded-[6px] border border-[var(--hair)] bg-[var(--ground2)]
+        px-4 py-5 sm:px-5 sm:py-5 lg:px-6 lg:py-6
         transition-colors duration-200 ease-out
-        sm:hover:border-[rgba(47,201,194,0.18)]
-        sm:hover:bg-[rgba(20,48,50,0.5)]
+        hover:border-[rgba(47,201,194,0.32)]
+        hover:bg-[rgba(20,48,50,0.5)]
       "
     >
       <div
@@ -40,18 +40,18 @@ export function Project({ project, index }: ProjectProps) {
 
         <div className="flex flex-col gap-4 sm:gap-5 lg:flex-row lg:items-start lg:gap-7">
           {project.image && (
-            <div className="overflow-hidden rounded-[6px] border border-[var(--hair)] bg-[var(--ground2)] flex-shrink-0 w-full lg:w-[220px]">
+            <div className="overflow-hidden rounded-[6px] border border-[var(--hair)] bg-[var(--ground)] flex-shrink-0 w-full lg:w-[280px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={project.image}
                 alt={project.imageAlt ?? project.title}
                 loading="lazy"
-                className="block w-full h-full object-cover aspect-[4/3]"
+                className="block w-full h-full object-cover aspect-video"
               />
             </div>
           )}
 
-          <div className="flex flex-col gap-3 sm:gap-4 min-w-0 flex-1">
+          <div className="flex flex-col gap-3 sm:gap-4 min-w-0 flex-1 max-w-xl">
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
               <span className="lg:hidden font-mono text-[11px] font-medium tracking-[0.18em] uppercase text-[var(--dim)] tabular-nums">
                 0{index + 1}
