@@ -74,7 +74,7 @@ const mdxComponents = {
           src={typeof src === "string" ? src : ""}
           alt={alt ?? ""}
           loading="lazy"
-          className="block w-full h-auto"
+          className="block w-full h-auto object-cover aspect-[16/9]"
         />
       </div>
       {alt && (
@@ -171,7 +171,7 @@ export default async function WorkPage({ params }: Props) {
                   src={entry.heroImage}
                   alt={entry.heroImageAlt ?? entry.title}
                   loading="lazy"
-                  className="block w-full h-auto"
+                  className="block w-full h-auto object-cover aspect-[16/9]"
                 />
               </div>
             </div>

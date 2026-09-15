@@ -27,78 +27,83 @@ export function Project({ project, index }: ProjectProps) {
     >
       <div
         className="
-          grid grid-cols-1 gap-y-2
-          lg:grid-cols-[140px_1fr] lg:gap-y-0 lg:gap-x-8
+          grid grid-cols-1 gap-y-3
+          lg:grid lg:grid-cols-[160px_1fr] lg:gap-x-8 lg:gap-y-0
         "
       >
         <p className="
-          font-mono text-[11px] font-medium tracking-[0.18em] uppercase
-          text-[var(--dim)] tabular-nums pt-0.5 lg:pt-1
+          hidden lg:block font-mono text-[11px] font-medium tracking-[0.18em] uppercase
+          text-[var(--dim)] tabular-nums pt-1
         ">
           0{index + 1}
         </p>
 
-        <div className="flex flex-col gap-3 sm:gap-4">
+        <div className="flex flex-col gap-4 sm:gap-5 lg:flex-row lg:items-start lg:gap-6">
           {project.image && (
-            <div className="overflow-hidden rounded-[6px] border border-[var(--hair)] bg-[var(--ground2)]">
+            <div className="overflow-hidden rounded-[6px] border border-[var(--hair)] bg-[var(--ground2)] flex-shrink-0 w-full lg:w-[160px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={project.image}
                 alt={project.imageAlt ?? project.title}
                 loading="lazy"
-                className="block w-full h-auto"
+                className="block w-full h-full object-cover aspect-[4/3]"
               />
             </div>
           )}
 
-          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-            <h3 className="text-[var(--type)] font-medium text-[1.0625rem] sm:text-[1.0625rem] leading-[1.4] tracking-[-0.005em]">
-              {project.title}
-            </h3>
-            {project.href && (
-              <a
-                href={project.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${project.title} — opens in a new tab`}
-                className="
-                  inline-flex items-center text-[var(--dim)]
-                  sm:group-hover:text-[var(--accent)]
-                  transition-all duration-200 ease-out
-                  sm:group-hover:translate-x-0.5
-                  focus-visible:outline-none focus-visible:text-[var(--accent)]
-                "
-              >
-                <ArrowUpRight className="w-4 h-4" strokeWidth={1.5} />
-              </a>
+          <div className="flex flex-col gap-2 sm:gap-3 min-w-0">
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+              <span className="lg:hidden font-mono text-[11px] font-medium tracking-[0.18em] uppercase text-[var(--dim)] tabular-nums">
+                0{index + 1}
+              </span>
+              <h3 className="text-[var(--type)] font-medium text-[1.0625rem] sm:text-[1.0625rem] leading-[1.4] tracking-[-0.005em]">
+                {project.title}
+              </h3>
+              {project.href && (
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${project.title} — opens in a new tab`}
+                  className="
+                    inline-flex items-center text-[var(--dim)]
+                    sm:group-hover:text-[var(--accent)]
+                    transition-all duration-200 ease-out
+                    sm:group-hover:translate-x-0.5
+                    focus-visible:outline-none focus-visible:text-[var(--accent)]
+                  "
+                >
+                  <ArrowUpRight className="w-4 h-4" strokeWidth={1.5} />
+                </a>
+              )}
+            </div>
+
+            <p className="text-[var(--prose)] text-[0.9375rem] sm:text-[1rem] leading-[1.7]">
+              {project.description}
+            </p>
+
+            {project.tech && project.tech.length > 0 && (
+              <ul className="flex flex-wrap gap-2 pt-1">
+                {project.tech.map((tech) => (
+                  <li key={tech}>
+                    <span
+                      className="
+                        inline-block px-3 py-1 rounded-full
+                        text-[12px] text-[var(--accent)]
+                        bg-[rgba(47,201,194,0.06)]
+                        border border-[rgba(47,201,194,0.14)]
+                        transition-colors duration-200
+                        sm:group-hover:bg-[rgba(47,201,194,0.1)]
+                        sm:group-hover:border-[rgba(47,201,194,0.24)]
+                      "
+                    >
+                      {tech}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
-
-          <p className="text-[var(--prose)] text-[1rem] leading-[1.7]">
-            {project.description}
-          </p>
-
-          {project.tech && project.tech.length > 0 && (
-            <ul className="flex flex-wrap gap-2 pt-1">
-              {project.tech.map((tech) => (
-                <li key={tech}>
-                  <span
-                    className="
-                      inline-block px-3 py-1 rounded-full
-                      text-[12px] text-[var(--accent)]
-                      bg-[rgba(47,201,194,0.06)]
-                      border border-[rgba(47,201,194,0.14)]
-                      transition-colors duration-200
-                      sm:group-hover:bg-[rgba(47,201,194,0.1)]
-                      sm:group-hover:border-[rgba(47,201,194,0.24)]
-                    "
-                  >
-                    {tech}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
       </div>
     </motion.article>
