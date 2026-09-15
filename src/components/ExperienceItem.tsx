@@ -33,7 +33,7 @@ export function ExperienceItem({ item, index }: ExperienceItemProps) {
       <div className="flex flex-col gap-3 min-w-0 flex-1">
         {/* Role & Company */}
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-          <h3 className="font-semibold text-slate-200 text-base leading-snug group-hover:text-teal-300 transition-colors duration-200">
+          <h3 className="font-semibold text-slate-200 text-base leading-snug group-hover/title:text-teal-300 transition-colors duration-200">
             <span>{item.role}</span>
             <span className="text-slate-500 mx-1">·</span>
             <span>{item.company}</span>
@@ -44,7 +44,7 @@ export function ExperienceItem({ item, index }: ExperienceItemProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${item.company} — opens in a new tab`}
-              className="inline-flex items-center text-slate-500 hover:text-accent transition-all duration-200 focus-visible:outline-none group-hover:-translate-y-1 group-hover:translate-x-0.5"
+              className="inline-flex items-center text-slate-500 hover:text-accent transition-transform duration-200 focus-visible:outline-none group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transition-none"
             >
               <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.5} />
             </a>
@@ -92,7 +92,7 @@ export function ExperienceItem({ item, index }: ExperienceItemProps) {
           <ul className="flex flex-wrap gap-2 pt-1">
             {item.technologies.map((tech) => (
               <li key={tech}>
-                <span className="inline-block px-3 py-1 rounded-full text-xs text-slate-400 bg-slate-800/50 border border-slate-700/50 transition-colors duration-200 group-hover:border-slate-600/50">
+                <span className="text-teal-300 bg-teal-400/10 rounded-full px-3 py-1 text-xs font-medium">
                   {tech}
                 </span>
               </li>

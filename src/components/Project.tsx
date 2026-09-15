@@ -38,7 +38,7 @@ export function Project({ project, index }: ProjectProps) {
         <div className="flex flex-col gap-1">
           {/* Title with external link */}
             <div className="flex items-baseline gap-3">
-              <h3 className="font-semibold text-slate-200 text-base leading-snug group-hover:text-teal-300 transition-colors duration-200">
+              <h3 className="font-semibold text-slate-200 text-base leading-snug group-hover/title:text-teal-300 transition-colors duration-200">
                 {project.title}
               </h3>
               {project.href && (
@@ -47,7 +47,7 @@ export function Project({ project, index }: ProjectProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${project.title} — opens in a new tab`}
-                  className="text-slate-400 hover:text-accent transition-all duration-200 focus-visible:outline-none group-hover:-translate-y-1 group-hover:translate-x-0.5"
+                  className="text-slate-400 hover:text-accent transition-transform duration-200 focus-visible:outline-none group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transition-none"
                 >
                 <ArrowUpRight className="w-4 h-4" strokeWidth={1.5} />
               </a>
@@ -64,7 +64,7 @@ export function Project({ project, index }: ProjectProps) {
             <ul className="flex flex-wrap gap-2 mt-2">
               {project.tech.map((tech) => (
                 <li key={tech}>
-                  <span className="inline-block px-3 py-1 rounded-full text-xs text-slate-400 bg-slate-800/50 border border-slate-700/50">
+                  <span className="text-teal-300 bg-teal-400/10 rounded-full px-3 py-1 text-xs font-medium">
                     {tech}
                   </span>
                 </li>
