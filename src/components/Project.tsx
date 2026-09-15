@@ -38,10 +38,10 @@ export function Project({ project, index }: ProjectProps) {
         <div className="flex flex-col gap-1">
           {/* Title row */}
           <div className="flex items-baseline gap-3">
-            <h3 className="font-semibold text-slate-200 text-base leading-snug group-hover:text-teal-300 transition-colors duration-200">
+              <h3 className="font-semibold text-slate-200 text-base leading-snug group-hover:!text-teal-300 transition-colors duration-200">
               {project.title}
             </h3>
-            <span className="text-slate-400 transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transition-none">
+            <span className="text-slate-400 transition-transform duration-200 group-hover:!-translate-y-1 group-hover:!translate-x-1 motion-reduce:transition-none">
               <ArrowUpRight className="w-4 h-4" strokeWidth={1.5} />
             </span>
           </div>
