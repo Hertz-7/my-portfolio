@@ -38,7 +38,7 @@ export function Project({ project, index }: ProjectProps) {
         <div className="flex flex-col gap-1">
           {/* Title with external link */}
             <div className="flex items-baseline gap-3">
-              <h3 className="font-semibold text-slate-200 text-base leading-snug group-hover/title:text-teal-300 transition-colors duration-200">
+              <h3 className="font-semibold text-slate-200 text-base leading-snug group-hover:text-teal-300 transition-colors duration-200">
                 {project.title}
               </h3>
               {project.href && (

@@ -33,7 +33,7 @@ export function ExperienceItem({ item, index }: ExperienceItemProps) {
       <div className="flex flex-col gap-3 min-w-0 flex-1">
         {/* Role & Company */}
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-          <h3 className="font-semibold text-slate-200 text-base leading-snug group-hover/title:text-teal-300 transition-colors duration-200">
+          <h3 className="font-semibold text-slate-200 text-base leading-snug group-hover:text-teal-300 transition-colors duration-200">
             <span>{item.role}</span>
             <span className="text-slate-500 mx-1">·</span>
             <span>{item.company}</span>
