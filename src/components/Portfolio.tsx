@@ -19,8 +19,8 @@ export function Portfolio() {
 
         <div className="relative z-10">
           <About />
-          <Experience />
           <Projects />
+          <Experience />
         </div>
 
         <footer className="relative z-10 mt-4 pt-8 border-t border-[var(--hair)]">

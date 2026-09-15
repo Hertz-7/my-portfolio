@@ -34,18 +34,18 @@ export function ExperienceItem({ item, index }: ExperienceItemProps) {
       <div
         className="
           grid grid-cols-1 gap-y-2
-          lg:grid-cols-[140px_1fr] lg:gap-y-0 lg:gap-x-8
+          lg:grid lg:grid-cols-[140px_1fr] lg:items-start lg:gap-y-0 lg:gap-x-8
         "
       >
         <p className="
           font-mono text-[11px] font-medium tracking-[0.18em] uppercase
           text-[var(--dim)] tabular-nums pt-0.5
-          lg:pt-1
+          lg:pt-1.5
         ">
           {item.date}
         </p>
 
-        <div className="flex flex-col gap-3 sm:gap-4">
+        <div className="flex flex-col gap-3 sm:gap-4 min-w-0">
           <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
             <h3 className="text-[var(--type)] font-medium text-[1.0625rem] sm:text-[1.0625rem] leading-[1.4] tracking-[-0.005em]">
               <span>{item.role}</span>

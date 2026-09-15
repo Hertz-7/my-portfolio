@@ -38,9 +38,9 @@ export function Project({ project, index }: ProjectProps) {
           0{index + 1}
         </p>
 
-        <div className="flex flex-col gap-4 sm:gap-5 lg:flex-row lg:items-start lg:gap-6">
+        <div className="flex flex-col gap-4 sm:gap-5 lg:flex-row lg:items-start lg:gap-7">
           {project.image && (
-            <div className="overflow-hidden rounded-[6px] border border-[var(--hair)] bg-[var(--ground2)] flex-shrink-0 w-full lg:w-[160px]">
+            <div className="overflow-hidden rounded-[6px] border border-[var(--hair)] bg-[var(--ground2)] flex-shrink-0 w-full lg:w-[220px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={project.image}
@@ -51,7 +51,7 @@ export function Project({ project, index }: ProjectProps) {
             </div>
           )}
 
-          <div className="flex flex-col gap-2 sm:gap-3 min-w-0">
+          <div className="flex flex-col gap-3 sm:gap-4 min-w-0 flex-1">
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
               <span className="lg:hidden font-mono text-[11px] font-medium tracking-[0.18em] uppercase text-[var(--dim)] tabular-nums">
                 0{index + 1}

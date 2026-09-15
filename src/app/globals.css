@@ -106,15 +106,22 @@
 @media (min-width: 1024px) {
   .portfolio-shell {
     display: grid;
-    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
-    column-gap: 110px;
+    grid-template-columns: minmax(240px, 0.7fr) minmax(0, 1.6fr);
+    column-gap: 72px;
     padding: 1.5rem 3rem 0;
   }
 }
 
 @media (min-width: 1280px) {
   .portfolio-shell {
-    column-gap: 130px;
+    grid-template-columns: minmax(260px, 0.7fr) minmax(0, 1.7fr);
+    column-gap: 88px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .portfolio-shell {
+    column-gap: 110px;
   }
 }
 
@@ -140,14 +147,19 @@
   padding-top: 1.5rem;
   padding-bottom: 3rem;
   min-width: 0;
-  max-width: 62ch;
 }
 
 @media (min-width: 1024px) {
   .portfolio-main {
     padding-top: 8rem;
     padding-bottom: 3rem;
-    max-width: 62ch;
+    max-width: 760px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .portfolio-main {
+    max-width: 820px;
   }
 }
 
