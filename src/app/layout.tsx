@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { Spotlight } from "@/components/Spotlight";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -82,6 +83,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <Spotlight />
         {children}
         <Analytics />
       </body>

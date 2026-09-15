@@ -21,35 +21,25 @@ export function Navigation({ items, orientation = "vertical" }: NavigationProps)
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null)
-      // Follow actual DOM order, not the nav array order.
       .sort((a, b) => a.offsetTop - b.offsetTop);
 
     if (sections.length === 0) return;
-
-    // View line: a section becomes active the moment its top edge
-    // crosses 30% from the top of the viewport.
-    const VIEW_LINE_RATIO = 0.3;
 
     let ticking = false;
 
     const update = () => {
       ticking = false;
-      const line = window.innerHeight * VIEW_LINE_RATIO;
-
+      const line = window.innerHeight * 0.3;
       let current = `#${sections[0].id}`;
       for (const s of sections) {
         if (s.getBoundingClientRect().top <= line) {
           current = `#${s.id}`;
         }
       }
-
-      // Bottom-of-page guard: once the footer is reached, the last
-      // section stays active even if its top never crosses the line.
       const doc = document.documentElement;
       if (window.innerHeight + window.scrollY >= doc.scrollHeight - 2) {
         current = `#${sections[sections.length - 1].id}`;
       }
-
       setActive((prev) => (prev === current ? prev : current));
     };
 
@@ -71,10 +61,7 @@ export function Navigation({ items, orientation = "vertical" }: NavigationProps)
 
   if (orientation === "horizontal") {
     return (
-      <nav
-        aria-label="Primary"
-        className="flex flex-row flex-wrap items-center gap-x-6 gap-y-2 lg:hidden"
-      >
+      <nav aria-label="Primary" className="flex flex-row flex-wrap items-center gap-x-6 gap-y-2">
         {items.map(({ label, href }) => {
           const isActive = active === href;
           return (
@@ -82,27 +69,19 @@ export function Navigation({ items, orientation = "vertical" }: NavigationProps)
               key={href}
               href={href}
               className={`
-                relative inline-flex items-center
-                text-[11px] font-medium tracking-[0.18em] uppercase
-                py-2
-                transition-colors duration-200
-                focus-visible:outline-none focus-visible:text-[var(--accent)]
-                ${
-                  isActive
-                    ? "text-[var(--accent)]"
-                    : "text-[var(--dim)] hover:text-[var(--type)]"
-                }
+                relative text-xs font-medium tracking-[0.18em] uppercase
+                py-2 transition-colors duration-200
+                focus-visible:outline-none focus-visible:text-accent
+                ${isActive ? "text-accent" : "text-slate-400 hover:text-slate-200"}
               `}
             >
-              <motion.span
-                aria-hidden="true"
-                initial={false}
-                animate={{
-                  width: isActive ? "100%" : "0%",
-                }}
-                transition={{ duration: 0.25, ease: "easeOut" }}
-                className="absolute left-0 bottom-0 h-px bg-[var(--accent)]"
-              />
+              {isActive && (
+                <motion.span
+                  layoutId="active-underline"
+                  className="absolute left-0 bottom-0 h-px w-full bg-accent"
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                />
+              )}
               {label}
             </a>
           );
@@ -112,10 +91,7 @@ export function Navigation({ items, orientation = "vertical" }: NavigationProps)
   }
 
   return (
-    <nav
-      aria-label="Primary"
-      className="hidden lg:flex flex-col gap-3"
-    >
+    <nav aria-label="Primary" className="flex flex-col gap-2">
       {items.map(({ label, href }) => {
         const isActive = active === href;
         return (
@@ -123,13 +99,11 @@ export function Navigation({ items, orientation = "vertical" }: NavigationProps)
             key={href}
             href={href}
             initial={false}
-            animate={{
-              opacity: isActive ? 1 : 0.65,
-            }}
+            animate={{ opacity: isActive ? 1 : 0.65 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
             className="
               group flex items-center gap-5
-              text-[11px] font-medium tracking-[0.18em] uppercase
+              text-xs font-medium tracking-[0.18em] uppercase
               focus-visible:outline-none focus-visible:opacity-100
             "
           >
@@ -137,7 +111,7 @@ export function Navigation({ items, orientation = "vertical" }: NavigationProps)
               aria-hidden="true"
               initial={false}
               animate={{
-                width: isActive ? 60 : 30,
+                width: isActive ? 48 : 24,
                 backgroundColor: isActive ? "var(--accent)" : "var(--dim)",
               }}
               transition={{ duration: 0.3, ease: "easeOut" }}
@@ -146,8 +120,8 @@ export function Navigation({ items, orientation = "vertical" }: NavigationProps)
             <span
               className={
                 isActive
-                  ? "text-[var(--accent)]"
-                  : "text-[var(--dim)] group-hover:text-[var(--accent)] transition-colors duration-200"
+                  ? "text-slate-200"
+                  : "text-slate-400 group-hover:text-slate-200 transition-colors duration-200"
               }
             >
               {label}

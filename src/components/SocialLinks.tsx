@@ -19,10 +19,10 @@ export function SocialLinks() {
             aria-label={label}
             className="
               inline-flex items-center justify-center
-              text-[var(--slate)] hover:text-[var(--accent)]
+              text-slate-400 hover:text-accent
               transition-all duration-200 ease-out
               hover:-translate-y-0.5
-              focus-visible:outline-none focus-visible:text-[var(--accent)]
+              focus-visible:outline-none focus-visible:text-accent
             "
           >
             <Icon className="w-[20px] h-[20px]" />

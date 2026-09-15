@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Navigation } from "./Navigation";
 import { SocialLinks } from "./SocialLinks";
 
@@ -12,38 +11,33 @@ const NAV_ITEMS = [
 
 export function Sidebar() {
   return (
-    <aside className="portfolio-sidebar">
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="flex flex-col gap-5 lg:gap-6"
-      >
-        <header className="flex flex-col gap-3 w-full max-w-xs">
-          <h1 className="text-[var(--type)] font-display font-bold leading-[1.05] tracking-tight text-2xl lg:text-3xl">
-            Mohammad&nbsp;Aosaf
-          </h1>
-          <p className="text-[var(--type)] text-[1.0625rem] leading-[1.3] font-medium">
-            AI &amp; Full-Stack Engineer
-          </p>
-          <p className="text-[var(--prose)] text-[0.95rem] leading-[1.6]">
-            I build accessible, production AI systems end to end — from
-            multi-agent reasoning to the platform underneath.
-          </p>
-        </header>
+    <div className="flex flex-col gap-6">
+      <header className="flex flex-col gap-2">
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-200">
+          Mohammad&nbsp;Aosaf
+        </h1>
+        <p className="text-lg font-medium text-slate-200">
+          AI &amp; Full-Stack Engineer
+        </p>
+        <p className="max-w-xs mt-4 text-slate-400 leading-relaxed">
+          I build accessible, production AI systems end to end — from multi-agent reasoning to the platform underneath.
+        </p>
+      </header>
 
-        <div className="mt-1 lg:hidden">
-          <Navigation items={NAV_ITEMS} orientation="horizontal" />
-        </div>
+      {/* Mobile nav */}
+      <div className="lg:hidden">
+        <Navigation items={NAV_ITEMS} orientation="horizontal" />
+      </div>
 
-        <div className="mt-8 lg:mt-16 hidden lg:block">
-          <Navigation items={NAV_ITEMS} orientation="vertical" />
-        </div>
+      {/* Desktop nav — in the middle */}
+      <div className="hidden lg:block">
+        <Navigation items={NAV_ITEMS} orientation="vertical" />
+      </div>
 
-        <div className="mt-6 lg:mt-auto lg:pt-10">
-          <SocialLinks />
-        </div>
-      </motion.div>
-    </aside>
+      {/* Social icons at bottom */}
+      <div className="flex items-center gap-5 mt-8 lg:mt-0">
+        <SocialLinks />
+      </div>
+    </div>
   );
 }

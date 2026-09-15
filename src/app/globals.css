@@ -1,28 +1,28 @@
 @import "tailwindcss";
 
 /*
- * Teal palette — restored from the project's design system.
+ * Brittany Chiang v4-inspired palette — dark slate base with teal accent.
  *
- *  ground  page background         — abyssal teal-black
- *  ground2 slightly raised panels  — one tonal step above ground
- *  hair   1px separators           — barely-visible teal line
- *  type   headings & strong text   — near-white
- *  prose  body copy                 — muted teal-gray
- *  dim    labels, eyebrows, dates  — dimmer teal-gray
- *  accent interactive accent       — luminous teal
+ *  ground/background   slate-950 (#020617)  — near-black page bg
+ *  ground2/surface      slate-900 (#0f172a)  — raised panels
+ *  elevated             slate-800 (#1e293b)  — hover states, borders
+ *  border               slate-700 (#334155)  — visible separators
+ *  type/heading         slate-200 (#e2e8f0)  — near-white primary text
+ *  prose/body           slate-400 (#94a3b8)  — muted body copy
+ *  accent               teal-400 (#2dd4bf)   — interactive teal accent (kept from original)
  */
 
 :root {
-  --ground: #04121A;
-  --ground2: #071C25;
-  --surface: #0A2028;
-  --hair: #143038;
-  --type: #E6F2F3;
-  --prose: #BFD2D6;
-  --dim: #7B979E;
-  --accent: #2FC9C2;
+  --ground: #020617;
+  --ground2: #0f172a;
+  --surface: #1e293b;
+  --border: #334155;
+  --type: #e2e8f0;
+  --prose: #94a3b8;
+  --dim: #64748b;
+  --accent: #2dd4bf;
 
-  /* Brittany-friendly aliases used by the new component tree */
+  /* Aliases */
   --light: var(--type);
   --slate: var(--prose);
   --mute: var(--dim);
@@ -35,9 +35,9 @@
 
 @theme inline {
   --color-ground: var(--ground);
-  --color-surface: var(--ground2);
-  --color-elevated: var(--surface);
-  --color-hair: var(--hair);
+  --color-ground2: var(--ground2);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
   --color-light: var(--type);
   --color-slate: var(--prose);
   --color-mute: var(--dim);
@@ -46,7 +46,6 @@
   --color-type: var(--type);
   --color-prose: var(--prose);
   --color-dim: var(--dim);
-  --color-ground2: var(--ground2);
 
   --font-sans: var(--stack-body);
   --font-mono: var(--stack-mono);
@@ -55,8 +54,14 @@
 
 @layer base {
   * {
-    border-color: var(--hair);
+    border-color: var(--border);
   }
+
+  html {
+    font-family: var(--stack-body);
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--ground);
     color: var(--prose);
@@ -64,107 +69,14 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  html {
-    font-family: var(--stack-body);
-    scroll-behavior: smooth;
-  }
+
   ::selection {
-    background-color: rgba(47, 201, 194, 0.22);
+    background-color: rgba(45, 212, 191, 0.22);
     color: var(--type);
   }
 }
 
-/* Portfolio layout — single column on mobile, two-column on desktop.
- *
- * Mobile: sidebar flows above the main column with comfortable padding.
- * Desktop (≥1024px): sidebar becomes sticky (100vh), grid kicks in
- * with a 110px gutter that hosts the curved timeline.
- */
-
-.portfolio-shell {
-  width: 100%;
-  max-width: 1240px;
-  margin: 0 auto; 
-  padding: 0 1.25rem 0;
-  position: relative;
-}
-
-@media (min-width: 640px) {
-  .portfolio-shell {
-    padding-left: 1.75rem;
-    padding-right: 1.75rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .portfolio-shell {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .portfolio-shell {
-    display: grid;
-    grid-template-columns: minmax(240px, 0.7fr) minmax(0, 1.6fr);
-    column-gap: 72px;
-    padding: 0 3rem 0;
-  }
-}
-
-@media (min-width: 1280px) {
-  .portfolio-shell {
-    grid-template-columns: minmax(260px, 0.7fr) minmax(0, 1.7fr);
-    column-gap: 88px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .portfolio-shell {
-    column-gap: 110px;
-  }
-}
-
-.portfolio-sidebar {
-  margin: 32px;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 2rem;
-}
-
-@media (min-width: 1024px) {
-  .portfolio-sidebar {
-    position: sticky;
-    top: 32px;
-    align-self: start;
-    height: 100vh;
-    padding-top: 0;
-    padding-bottom: 4rem;
-  }
-}
-
-.portfolio-main {
-  position: relative;
-  padding-top: 1.5rem;
-  padding-bottom: 3rem;
-  min-width: 0;
-}
-
-@media (min-width: 1024px) {
-  .portfolio-main {
-    padding-top: 0;
-    padding-bottom: 3rem;
-    max-width: 760px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .portfolio-main {
-    max-width: 820px;
-  }
-}
-
-/* Reduced-motion guard for any animation */
+/* Reduced-motion guard */
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -236,8 +148,7 @@ article h3 {
   line-height: 1.3;
   letter-spacing: -0.014em;
   color: var(--type);
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
+   margin-bottom: 0.5rem;
 }
 
 article p {
