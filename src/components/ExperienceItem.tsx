@@ -11,7 +11,11 @@ interface ExperienceItemProps {
 
 export function ExperienceItem({ item, index }: ExperienceItemProps) {
   return (
-    <motion.article
+    <motion.a
+      href={item.href ?? "#"}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${item.company} — opens in a new tab`}
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -20,7 +24,7 @@ export function ExperienceItem({ item, index }: ExperienceItemProps) {
         ease: "easeOut",
         delay: index * 0.05,
       }}
-      className="group flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8 transition-colors duration-200"
+      className="group relative flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8 transition-colors duration-200 no-underline"
     >
       {/* Date column */}
       <div className="sm:w-32 flex-shrink-0">
@@ -42,16 +46,6 @@ export function ExperienceItem({ item, index }: ExperienceItemProps) {
             <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.5} />
           </span>
         </div>
-        {item.href && (
-          <a
-            href={item.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${item.company} — opens in a new tab`}
-            className="absolute inset-0 z-10"
-            tabIndex={-1}
-          />
-        )}
 
         {/* Description points */}
         <ul className="flex flex-col gap-2 pl-4 list-disc marker:text-accent">
@@ -65,25 +59,35 @@ export function ExperienceItem({ item, index }: ExperienceItemProps) {
           ))}
         </ul>
 
-        {/* Links */}
+        {/* Links — converted to divs to avoid nested anchors */}
         {item.links && item.links.length > 0 && (
           <ul className="flex flex-wrap gap-x-5 gap-y-2 pt-1">
             {item.links.map((link) => (
               <li key={link.href}>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <div
+                  role="link"
+                  tabIndex={0}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(link.href, "_blank", "noopener,noreferrer");
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      window.open(link.href, "_blank", "noopener,noreferrer");
+                    }
+                  }}
                   className="
                     inline-flex items-center gap-1.5
                     text-xs text-slate-400 hover:text-accent
                     transition-colors duration-200
-                    focus-visible:outline-none focus-visible:text-accent
+                    focus-visible:outline-none focus-visible:text-accent cursor-pointer
                   "
                 >
                   <ArrowUpRight className="w-3 h-3" strokeWidth={1.5} />
                   <span>{link.label}</span>
-                </a>
+                </div>
               </li>
             ))}
           </ul>
@@ -102,6 +106,6 @@ export function ExperienceItem({ item, index }: ExperienceItemProps) {
           </ul>
         )}
       </div>
-    </motion.article>
+    </motion.a>
   );
 }

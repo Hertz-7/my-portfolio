@@ -11,12 +11,16 @@ interface ProjectProps {
 
 export function Project({ project, index }: ProjectProps) {
   return (
-    <motion.article
+    <motion.a
+      href={project.href ?? "#"}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${project.title} — opens in a new tab`}
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.05 }}
-      className="group relative flex flex-col sm:flex-row items-start gap-4 sm:gap-6"
+      className="group relative flex flex-col sm:flex-row items-start gap-4 sm:gap-6 no-underline"
     >
       {/* Image thumbnail — explicit width, top-aligned */}
       {project.image && (
@@ -38,7 +42,7 @@ export function Project({ project, index }: ProjectProps) {
         <div className="flex flex-col gap-1">
           {/* Title row */}
           <div className="flex items-baseline gap-3">
-              <h3 className="font-semibold text-slate-200 text-base leading-snug group-hover:!text-teal-300 transition-colors duration-200">
+            <h3 className="font-semibold text-slate-200 text-base leading-snug group-hover:!text-teal-300 transition-colors duration-200">
               {project.title}
             </h3>
             <span className="text-slate-400 transition-transform duration-200 group-hover:!-translate-y-1 group-hover:!translate-x-1 motion-reduce:transition-none">
@@ -65,18 +69,6 @@ export function Project({ project, index }: ProjectProps) {
           )}
         </div>
       </div>
-
-      {/* Stretched link overlay — makes entire card clickable */}
-      {project.href && (
-        <a
-          href={project.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${project.title} — opens in a new tab`}
-          className="absolute inset-0 z-10"
-          tabIndex={-1}
-        />
-      )}
-    </motion.article>
+    </motion.a>
   );
 }
